@@ -16,78 +16,64 @@
   backdrop-filter: blur(12px);
 }
 
-.header-bar,
-.button-row,
-.button-stack,
-.tag-cloud,
-.meta-row {
-  gap: 12px;
-}
-
-.footer-grid,
-.hero-grid,
-.detail-layout,
-.button-row,
-.button-stack,
-.hero-stats,
-.section-title.with-link,
-.card-actions,
-.doctor-card-head,
-.doctor-stats,
-.article-meta,
-.review-head,
-.header-actions,
-.tag-cloud,
-.meta-row,
-.footer-bottom,
-.search-head {
-  display: flex;
-}
-
-.header-bar,
-.footer-bottom,
-.section-title.with-link,
-.card-actions,
-.search-head {
-  justify-content: space-between;
-}
-
-.header-bar,
-.header-actions,
-.brand,
-.site-nav,
-.hero-stats,
-.card-actions,
-.doctor-card-head,
-.doctor-stats,
-.article-meta,
-.review-head,
-.footer-bottom,
-.tag-cloud,
-.meta-row,
-.search-head {
-  align-items: center;
-}
-
 .header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   min-height: 72px;
   gap: 24px;
 }
 
 .site-nav {
+  display: flex;
+  align-items: center;
   gap: 32px;
   flex: 1;
   justify-content: center;
 }
 
+.brand {
+  display: flex;
+  align-items: center;
+}
+
 .header-actions {
+  display: flex;
+  align-items: center;
   gap: 16px;
 }
 
-.footer-grid,
+.button-row,
+.button-stack,
+.tag-cloud,
+.meta-row {
+  display: flex;
+  gap: 12px;
+}
+
 .hero-grid,
-.detail-layout {
+.detail-layout,
+.footer-grid {
+  display: flex;
   gap: 24px;
+}
+
+.footer-bottom,
+.section-title.with-link,
+.card-actions,
+.search-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hero-stats,
+.doctor-card-head,
+.doctor-stats,
+.article-meta,
+.review-head {
+  display: flex;
+  align-items: center;
 }
 
 .content-section {
