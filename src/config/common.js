@@ -1,7 +1,7 @@
 module.exports = {
   appName: 'GeoFlow',
   defaultLanguage: 'zh-CN',
-  staticPrefix: '/public/',
+  staticPrefix: '/',
   viewOptions: {
     autoescape: true,
     trimBlocks: true,
