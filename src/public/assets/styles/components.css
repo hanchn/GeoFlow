@@ -246,8 +246,7 @@
   white-space: nowrap;
 }
 
-.tag-chip,
-.filter-chip {
+.tag-chip {
   display: inline-flex;
   padding: 6px 14px;
   background: var(--primary-soft);
@@ -257,17 +256,54 @@
   border: 1px solid transparent;
 }
 
-.tag-chip.muted,
-.filter-chip {
+.tag-chip.muted {
   background: var(--surface-soft);
   color: var(--text-soft);
   border: 1px solid var(--line);
 }
 
-.tag-chip.muted:hover,
-.filter-chip:hover {
+.tag-chip.muted:hover {
   background: #f1f5f9;
   color: var(--text);
+}
+
+/* 筛选器 (Filter Bar) */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  background: #ffffff;
+  padding: 16px 24px;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  margin-bottom: 32px;
+}
+
+.filter-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 16px;
+  background: var(--surface-soft);
+  color: var(--text-soft);
+  font-size: 0.875rem;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.filter-chip:hover {
+  background: #ffffff;
+  color: var(--text);
+  border-color: var(--line);
+}
+
+.filter-chip.is-active {
+  background: var(--primary);
+  color: #ffffff;
+  font-weight: 500;
+  border-color: var(--primary);
 }
 
 .doctor-grid,

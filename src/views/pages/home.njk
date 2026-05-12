@@ -3,38 +3,74 @@
 {% block content %}
 <section class="home-hero">
   <div class="container hero-grid">
-    <div class="hero-copy card-surface">
-      <p class="eyebrow">汇聚白癜风及皮肤专病</p>
-      <h1>{{ heroTitle }}</h1>
-      <p class="subtitle">{{ heroSubtitle }}</p>
-
-      <div class="hero-stats">
-        {% for item in heroStats %}
-        <div>
-          <strong>{{ item.value }}</strong>
-          <span>{{ item.label }}</span>
-        </div>
-        {% endfor %}
+    <div class="hero-copy">
+      <div class="eyebrow">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+        北京市皮肤科重点专科 · 成立23年
       </div>
-
+      <h1 style="font-size: 3.5rem; line-height: 1.2; margin-bottom: 24px; color: #ffffff;">北京白癜风皮肤病专科医院</h1>
+      <p class="subtitle" style="font-size: 1.125rem; margin-bottom: 48px;">专注白癜风·银屑病诊疗23年 · NB-UVB光疗权威机构</p>
+      
+      <div class="hero-stats">
+        <div>
+          <strong>12万+</strong>
+          <span>累计诊治病例</span>
+        </div>
+        <div>
+          <strong>42+</strong>
+          <span>专业医生</span>
+        </div>
+        <div>
+          <strong>23年</strong>
+          <span>专科经验</span>
+        </div>
+        <div>
+          <strong>4.9分</strong>
+          <span>患者满意度</span>
+        </div>
+      </div>
+      
       <div class="button-row">
-        <a class="button primary" href="/experts">立即预约</a>
-        <a class="button secondary" href="/articles">了解治疗方案</a>
+        <a class="button" href="{{ site.appointmentPath }}" style="background: #ffffff; color: #1864ff; border-radius: 8px; min-width: 140px; height: 48px; padding: 0 32px; font-size: 1rem;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 8px;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          立即预约
+        </a>
+        <a class="button" href="/departments/vitiligo" style="background: rgba(255,255,255,0.15); color: #ffffff; border-radius: 8px; min-width: 140px; height: 48px; padding: 0 32px; font-size: 1rem;">
+          了解治疗方案
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left: 8px;"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </a>
       </div>
     </div>
 
-    <div class="hero-form card-surface">
-      <h2>免费在线咨询</h2>
-      <p>由专业医生团队评估方向，帮助你快速匹配科室和医生。</p>
-      <div class="appointment-list">
-        <span>白癜风治疗方案</span>
-        <span>银屑病反复发作</span>
-        <span>儿童皮肤病门诊</span>
-        <span>308 激光是否适合</span>
+    <div class="hero-form">
+      <div class="hero-form-title">免费在线咨询</div>
+      <div class="hero-form-desc">专业医生24小时在线，平均响应时间 &lt; 3分钟</div>
+      
+      <div class="hero-form-options">
+        <div class="hero-form-option">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle></svg>
+          您的症状持续多久了？
+        </div>
+        <div class="hero-form-option">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle></svg>
+          是否有家族病史？
+        </div>
+        <div class="hero-form-option">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle></svg>
+          之前是否接受过治疗？
+        </div>
+        <div class="hero-form-option">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle></svg>
+          发病部位在哪里？
+        </div>
       </div>
-      <div class="button-stack">
-        <a class="button primary" href="/experts">提交需求</a>
-        <a class="button secondary" href="tel:{{ site.phone }}">{{ site.phone }}</a>
+      
+      <button class="hero-form-submit">提交咨询，免费获取方案</button>
+      
+      <div class="hero-form-promises">
+        <span style="color: #10b981;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg> 隐私保护</span>
+        <span style="color: #64748b;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 7x12小时</span>
+        <span style="color: #f59e0b;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> 免费咨询</span>
       </div>
     </div>
   </div>
