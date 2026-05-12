@@ -30,6 +30,43 @@ Layers:
 5. The service assembles page data.
 6. The controller renders a Nunjucks template.
 
+## Environment Strategy
+
+The project supports four environments:
+
+- `development`
+- `testing`
+- `staging`
+- `production`
+
+Each environment maps to a dedicated file:
+
+- `.env.development`
+- `.env.testing`
+- `.env.staging`
+- `.env.production`
+
+`src/config/env.js` selects the file by `APP_ENV`.
+
+## Error Interception
+
+Use a dedicated Fastify plugin to centralize:
+
+- Uncaught application errors
+- Unified API error responses
+- SSR error page rendering
+- 404 fallback handling
+
+This keeps controllers focused on normal business flow.
+
+## Commit Guardrails
+
+Recommended commit protection chain:
+
+- `husky pre-commit`: runs project self-check
+- `husky commit-msg`: blocks empty and single-character messages
+- `commitlint`: enforces standardized commit message format
+
 ## Module Boundaries
 
 ### `src/config`

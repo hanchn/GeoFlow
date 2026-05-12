@@ -1,0 +1,32 @@
+{% extends "layouts/base.njk" %}
+
+{% block content %}
+<section class="hero">
+  <p class="eyebrow">GEO C-end Boilerplate</p>
+  <h1>{{ heroTitle }}</h1>
+  <p class="subtitle">{{ heroSubtitle }}</p>
+
+  <div class="panel">
+    <h2>Current Environment</h2>
+    <p>{{ currentEnv }}</p>
+  </div>
+
+  <div class="panel">
+    <h2>Supported Environments</h2>
+    <ul class="feature-list">
+      {% for envItem in environmentList %}
+      <li>{{ envItem }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div class="panel">
+    <h2>Included Safeguards</h2>
+    <ul class="feature-list">
+      {% for item in features %}
+      <li>{{ item }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+{% endblock %}
