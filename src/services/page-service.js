@@ -71,22 +71,25 @@ function getExpertsPage(site) {
       { label: '首页', href: '/' },
       { label: '专家团队', href: '/experts' }
     ]),
-    doctors: content.doctors,
+    experts: content.experts || content.doctors || [],
     tabs: ['全部科室', '白癜风科', '银屑病科', '儿童皮肤科', '激光美容科', '过敏皮肤科']
   };
 }
 
 function getExpertDetailPage(site, slug) {
-  const doctor = getAuthor(slug);
+  let doctor = content.experts ? content.experts.find((d) => d.slug === slug || d.id === slug) : null;
+  if (!doctor) {
+    doctor = getAuthor(slug);
+  }
 
   return {
     ...buildShell(site, 'experts'),
     doctor,
-    relatedDoctors: content.doctors.filter((item) => item.slug !== doctor.slug).slice(0, 3),
+    relatedDoctors: content.experts ? content.experts.filter((item) => item.slug !== doctor.slug && item.id !== doctor.id).slice(0, 3) : content.doctors.filter((item) => item.slug !== doctor.slug).slice(0, 3),
     breadcrumbs: [
       { label: '首页', href: '/' },
       { label: '专家团队', href: '/experts' },
-      { label: doctor.name, href: `/experts/${doctor.slug}` }
+      { label: doctor.name, href: `/experts/${doctor.id || doctor.slug}` }
     ]
   };
 }
@@ -100,14 +103,17 @@ function getArticlesPage(site) {
     ]),
     categories: ['全部', '白癜风', '银屑病', '儿童皮肤', '激光美容'],
     articles: content.articles,
-    recommendedDoctors: content.doctors.slice(0, 3),
+    recommendedDoctors: content.experts ? content.experts.slice(0, 3) : [],
     hotTags: ['白癜风治疗', '308激光', '银屑病饮食', '儿童湿疹', '皮肤屏障']
   };
 }
 
 function getArticleDetailPage(site, slug) {
   const article = content.articles.find((item) => item.slug === slug) || content.articles[0];
-  const author = getAuthor(article.authorSlug);
+  let author = content.experts ? content.experts.find((d) => d.slug === article.authorSlug) : null;
+  if (!author) {
+    author = getAuthor(article.authorSlug);
+  }
 
   return {
     ...buildShell(site, 'articles'),
