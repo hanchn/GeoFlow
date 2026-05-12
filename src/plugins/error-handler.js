@@ -1,3 +1,6 @@
+const messages = require('../messages');
+const { app, site } = require('../config');
+
 async function registerErrorHandler(fastify) {
   fastify.setErrorHandler((error, request, reply) => {
     request.log.error({
@@ -13,14 +16,22 @@ async function registerErrorHandler(fastify) {
     if (request.url.startsWith('/api/')) {
       return reply.status(statusCode).send({
         success: false,
-        message: statusCode === 500 ? 'Internal Server Error' : error.message
+        message: statusCode === 500
+          ? messages.error.INTERNAL_SERVER_ERROR
+          : error.message || messages.error.UNKNOWN_ERROR
       });
     }
 
-    return reply.status(statusCode).view('pages/error.njk', {
-      title: 'Error',
+    const pageName = statusCode === 404 ? 'pages/404.njk' : 'pages/500.njk';
+
+    return reply.status(statusCode).view(pageName, {
+      title: statusCode === 404 ? '404' : '500',
       statusCode,
-      message: statusCode === 500 ? 'Something went wrong.' : error.message
+      site,
+      currentEnv: app.appEnv,
+      message: statusCode === 500
+        ? messages.error.INTERNAL_SERVER_ERROR
+        : error.message || messages.error.UNKNOWN_ERROR
     });
   });
 
@@ -28,14 +39,16 @@ async function registerErrorHandler(fastify) {
     if (request.url.startsWith('/api/')) {
       return reply.status(404).send({
         success: false,
-        message: 'Not Found'
+        message: messages.error.NOT_FOUND
       });
     }
 
-    return reply.status(404).view('pages/error.njk', {
-      title: 'Not Found',
+    return reply.status(404).view('pages/404.njk', {
+      title: '404',
       statusCode: 404,
-      message: 'The page you requested does not exist.'
+      site,
+      currentEnv: app.appEnv,
+      message: messages.error.NOT_FOUND
     });
   });
 }

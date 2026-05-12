@@ -7,12 +7,18 @@
   <p class="subtitle">{{ heroSubtitle }}</p>
 
   <div class="panel">
-    <h2>Current Environment</h2>
+    <h2>当前环境</h2>
     <p>{{ currentEnv }}</p>
   </div>
 
   <div class="panel">
-    <h2>Supported Environments</h2>
+    <h2>当前站点</h2>
+    <p>站点编码：{{ currentSite }}</p>
+    <p>站点域名：{{ siteHost }}</p>
+  </div>
+
+  <div class="panel">
+    <h2>支持环境</h2>
     <ul class="feature-list">
       {% for envItem in environmentList %}
       <li>{{ envItem }}</li>
@@ -21,7 +27,7 @@
   </div>
 
   <div class="panel">
-    <h2>Included Safeguards</h2>
+    <h2>基础能力</h2>
     <ul class="feature-list">
       {% for item in features %}
       <li>{{ item }}</li>

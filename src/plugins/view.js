@@ -6,12 +6,8 @@ async function registerView(fastify, options) {
     engine: {
       nunjucks
     },
-    root: options.viewDir,
-    options: {
-      autoescape: true,
-      trimBlocks: true,
-      lstripBlocks: true
-    }
+    root: options.root,
+    options: options.options
   });
 }
 

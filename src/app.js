@@ -1,22 +1,28 @@
 const Fastify = require('fastify');
 const formbody = require('@fastify/formbody');
-const env = require('./config/env');
+const { app: appConfig, view, assets, site } = require('./config');
 const registerView = require('./plugins/view');
 const registerStatic = require('./plugins/static');
 const registerErrorHandler = require('./plugins/error-handler');
+const registerSwagger = require('./plugins/swagger');
+const registerJobs = require('./jobs');
 const routes = require('./routes');
 
 function buildApp() {
   const app = Fastify({
-    logger: !env.isProd
+    logger: appConfig.logger
   });
 
-  app.decorate('appEnv', env.appEnv);
+  app.decorate('appEnv', appConfig.appEnv);
+  app.decorate('appName', appConfig.appName);
+  app.decorate('siteConfig', site);
   app.register(formbody);
-  app.register(registerView, { viewDir: env.viewDir });
-  app.register(registerStatic, { publicDir: env.publicDir });
+  app.register(registerView, view);
+  app.register(registerStatic, assets);
+  app.register(registerSwagger);
   app.register(registerErrorHandler);
   app.register(routes);
+  app.register(registerJobs);
 
   return app;
 }

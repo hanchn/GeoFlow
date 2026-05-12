@@ -1,13 +1,16 @@
-async function getHomePageData(env) {
+async function getHomePageData(config) {
   return {
-    heroTitle: 'GeoFlow',
-    heroSubtitle: 'Fastify + Nunjucks GEO consumer scaffold',
-    currentEnv: env.appEnv,
+    heroTitle: config.site.name,
+    heroSubtitle: 'Fastify + Nunjucks GEO C 端项目骨架',
+    currentEnv: config.app.appEnv,
+    currentSite: config.site.code,
+    siteHost: config.site.host,
     environmentList: ['development', 'testing', 'staging', 'production'],
     features: [
-      'Four-environment configuration loading',
-      'Global error interception and 404 fallback',
-      'Commit self-check and invalid commit blocking'
+      '按环境隔离配置',
+      '站点兜底配置',
+      '全局异常拦截与基础错误页',
+      '提交自检与非法提交拦截'
     ]
   };
 }

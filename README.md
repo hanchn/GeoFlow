@@ -6,24 +6,43 @@ A minimal GEO consumer-facing project scaffold based on Node.js, Fastify, and Nu
 
 ```bash
 npm install
-npm run dev
+npm start
 ```
 
-Default local URL: `http://localhost:3000`
+默认启动环境：`testing`
+
+默认站点：`default`
 
 ## Environments
 
-- `development`: local development, reads `.env.development`
-- `testing`: testing environment, reads `.env.testing`
-- `staging`: pre-release environment, reads `.env.staging`
-- `production`: production environment, reads `.env.production`
+- `development`
+- `testing`
+- `staging`
+- `production`
 
-You can switch environment with:
+环境配置代码统一放在：`src/config/environments/`
+
+站点兜底配置统一放在：`src/config/sites/`
+
+三方 API 客户端统一放在：`src/clients/`
+
+非生产环境默认启用 Swagger：`/docs`
+
+## Start Scripts
 
 ```bash
-APP_ENV=testing node src/server.js
-APP_ENV=staging node src/server.js
-APP_ENV=production node src/server.js
+npm start
+npm run start:dev
+npm run start:test
+npm run start:staging
+npm run start:prod
+```
+
+可指定站点启动：
+
+```bash
+SITE_CODE=default npm start
+SITE_CODE=default npm run start:prod
 ```
 
 ## Commit Guardrails
@@ -36,21 +55,43 @@ APP_ENV=production node src/server.js
 
 ```text
 GeoFlow/
+├── server.js
 ├── .trae/
 │   └── skills/
 │       └── geo-fullstack-developer/
 │           └── SKILL.md
 ├── docs/
 │   └── architecture.md
+├── scripts/
+│   ├── check-staged-js.js
+│   ├── self-check.js
+│   └── validate-commit-msg.js
 ├── src/
 │   ├── app.js
-│   ├── server.js
+│   ├── main.js
+│   ├── clients/
+│   │   └── example-third-party-client.js
 │   ├── config/
-│   │   └── env.js
+│   │   ├── common.js
+│   │   ├── index.js
+│   │   ├── environments/
+│   │   └── sites/
 │   ├── controllers/
 │   │   └── home-controller.js
+│   ├── jobs/
+│   │   ├── example-health-job.js
+│   │   └── index.js
+│   ├── messages/
+│   │   ├── error.js
+│   │   ├── index.js
+│   │   ├── success.js
+│   │   └── warning.js
 │   ├── plugins/
+│   │   ├── error-handler.js
+│   │   ├── static.js
 │   │   └── view.js
+│   ├── public/
+│   │   └── assets/
 │   ├── routes/
 │   │   └── index.js
 │   ├── services/
@@ -59,6 +100,8 @@ GeoFlow/
 │       ├── layouts/
 │       │   └── base.njk
 │       └── pages/
+│           ├── 404.njk
+│           ├── 500.njk
 │           └── home.njk
 ├── .gitignore
 └── package.json
@@ -66,12 +109,14 @@ GeoFlow/
 
 ## Notes
 
-- `server.js` is the startup entry.
-- `app.js` builds the Fastify instance.
-- `routes` defines endpoints.
-- `controllers` coordinates request and response handling.
-- `services` composes business data.
-- `views` contains Nunjucks templates.
-- `scripts` contains commit self-check and message validation tools.
+- 根目录 `server.js` 是唯一主入口。
+- `src/config/index.js` 是统一配置出口。
+- `src/config/environments/` 按环境区分配置。
+- `src/config/sites/` 是站点兜底配置，后续可替换为数据库读取。
+- `src/clients/` 负责封装三方 API 调用，`services` 只做业务编排。
+- `src/jobs/` 是定时任务目录。
+- `src/messages/` 管理成功、警告、异常消息常量。
+- `src/views/layouts/` 和 `src/views/pages/404.njk`、`500.njk` 是基础页面能力。
+- 非生产环境自动开放 Swagger 文档 `/docs`。
 
 See `docs/architecture.md` for the detailed architecture design.
