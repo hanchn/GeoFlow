@@ -1,0 +1,36 @@
+{
+  "name": "geoflow",
+  "version": "0.1.0",
+  "private": true,
+  "description": "GEO consumer-facing web project based on Fastify and Nunjucks.",
+  "main": "src/server.js",
+  "scripts": {
+    "dev": "APP_ENV=development node --watch src/server.js",
+    "start": "APP_ENV=production node src/server.js",
+    "check": "node scripts/self-check.js",
+    "prepare": "husky",
+    "commitlint": "commitlint --edit"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@fastify/static": "^8.0.4",
+    "@fastify/formbody": "^8.0.2",
+    "@fastify/view": "^10.0.1",
+    "dotenv": "^16.4.5",
+    "fastify": "^5.0.0",
+    "nunjucks": "^3.2.4"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.8.0",
+    "@commitlint/config-conventional": "^19.8.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.5.2"
+  },
+  "lint-staged": {
+    "*.js": [
+      "node scripts/check-staged-js.js"
+    ]
+  }
+}
