@@ -81,7 +81,8 @@
 .two-column-page {
   display: grid;
   grid-template-columns: 240px minmax(0, 1fr);
-  gap: 24px;
+  gap: 32px;
+  align-items: start;
 }
 
 .side-tabs,
@@ -89,12 +90,27 @@
 .search-bar-panel,
 .intro-panel {
   display: grid;
-  gap: 14px;
+  gap: 16px;
 }
 
 .side-tab {
-  padding: 12px 14px;
+  padding: 14px 16px;
+  background: transparent;
+  color: var(--text-soft);
+  font-weight: 500;
+  transition: all 0.2s ease;
+  border-radius: var(--radius-md);
+}
+
+.side-tab:hover {
   background: var(--surface-soft);
+  color: var(--text);
+}
+
+.side-tab.is-active {
+  background: var(--primary-soft);
+  color: var(--primary-dark);
+  font-weight: 600;
 }
 
 .profile-hero,

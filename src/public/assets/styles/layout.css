@@ -17,6 +17,13 @@
 }
 
 .header-bar,
+.button-row,
+.button-stack,
+.tag-cloud,
+.meta-row {
+  gap: 12px;
+}
+
 .footer-grid,
 .hero-grid,
 .detail-layout,
@@ -63,20 +70,18 @@
 }
 
 .header-bar {
-  min-height: 78px;
-  gap: 20px;
-}
-
-.site-nav {
+  min-height: 72px;
   gap: 24px;
 }
 
-.header-actions,
-.button-row,
-.button-stack,
-.tag-cloud,
-.meta-row {
-  gap: 12px;
+.site-nav {
+  gap: 32px;
+  flex: 1;
+  justify-content: center;
+}
+
+.header-actions {
+  gap: 16px;
 }
 
 .footer-grid,
