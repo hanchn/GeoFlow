@@ -36,8 +36,8 @@ function getHomePage(site, appEnv) {
     heroTitle: '北京白癜风皮肤病专科医院',
     heroSubtitle: '汇聚白癜风、银屑病、儿童皮肤病等专病能力，提供更规范的专科诊疗与长期管理。',
     heroStats: content.site.stats,
-    featuredDoctors: content.doctors.slice(0, 4),
-    featuredArticles: content.articles.slice(0, 6),
+    featuredDoctors: content.experts ? content.experts.slice(0, 4) : [],
+    featuredArticles: content.articles ? content.articles.slice(0, 6) : [],
     processSteps: content.site.processSteps,
     homeFaqs: content.site.homeFaqs,
     patientStories: content.site.patientStories,
@@ -60,7 +60,7 @@ function getDepartmentPage(site, slug) {
       name: item.name,
       slug: item.slug
     })),
-    experts: content.doctors.filter((item) => item.department === department.name).slice(0, 2)
+    experts: content.experts ? content.experts.filter((item) => item.department === department.name).slice(0, 2) : []
   };
 }
 

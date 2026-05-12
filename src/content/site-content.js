@@ -191,38 +191,103 @@ module.exports = {
       ]
     }
   ],
-  doctors: [
+  experts: [
     {
-      slug: 'wang-jian-guo',
+      id: '1',
       name: '王建国',
-      shortName: '王',
       title: '主任医师',
       department: '白癜风科',
-      rating: 4.9,
-      years: 28,
-      patients: '15.0k',
-      articles: 28,
-      fee: 300,
-      color: 'blue',
-      specialties: ['白癜风系统诊疗', '308激光光疗', '儿童白癜风'],
-      intro: '深耕白癜风临床与科研 28 年，擅长稳定期与进展期白癜风的综合治疗。',
-      hospital: '北京协和医学院博士',
-      education: ['北京协和医学院 皮肤病学博士', '北京协和医院 皮肤科进修', '美国哈佛医学院 访问学者'],
-      journey: ['2005-至今 北京白癜风专科医院 白癜风科主任', '1999-2005 北京协和医院 皮肤科主治', '1996-1999 北京大学医学部 皮肤病专业'],
-      awards: ['国家自然科学基金项目主要参与人', '北京市科学技术三等奖', '发表 SCI 及核心论文 22 篇'],
-      papers: ['NB-UVB联合低能量激光治疗节段型白癜风', 'Efficacy of 308-nm excimer laser in treating vitiligo'],
-      reviews: [
-        { user: '李女士', score: 4.8, text: '孩子面部白斑稳定很多，医生方案很细致。', date: '2026-04-10' },
-        { user: '陈先生', score: 4.8, text: '复诊跟进很及时，治疗四个月后复色明显。', date: '2026-03-25' }
-      ]
+      hospital: '北京协和医学院',
+      experience: 28,
+      score: 4.9,
+      cases: 15000,
+      specialties: ['顽固性白癜风', '儿童白癜风', '节段型白癜风'],
+      tags: ['白癜风权威', '308激光专家']
     },
-    { slug: 'li-xue-mei', name: '李雪梅', shortName: '李', title: '副主任医师', department: '儿童皮肤科', rating: 4.9, years: 18, patients: '12.0k', articles: 19, fee: 300, color: 'orange', specialties: ['儿童皮肤病', '湿疹', '儿童白癜风'], intro: '关注儿童与青少年皮肤问题，擅长家庭管理与长期依从性指导。', hospital: '复旦大学医学院硕士' },
-    { slug: 'zhang-ming-yuan', name: '张明远', shortName: '张', title: '主任医师', department: '银屑病科', rating: 4.8, years: 22, patients: '13.5k', articles: 24, fee: 300, color: 'purple', specialties: ['银屑病系统治疗', '生物制剂管理'], intro: '聚焦顽固型银屑病及关节症状管理。', hospital: '中国医学科学院博士' },
-    { slug: 'chen-zhi-yuan', name: '陈志远', shortName: '陈', title: '主任医师', department: '白癜风科', rating: 4.8, years: 16, patients: '9.8k', articles: 16, fee: 280, color: 'blue', specialties: ['激光治疗', '光疗', '白癜风外科治疗'], intro: '擅长 308 激光、光疗与局部外科联合治疗。', hospital: '北京大学医学部硕士' },
-    { slug: 'liu-fang-fang', name: '刘芳芳', shortName: '刘', title: '主治医师', department: '银屑病科', rating: 4.7, years: 10, patients: '8.5k', articles: 12, fee: 260, color: 'purple', specialties: ['中西医结合', '银屑病维持治疗'], intro: '长期跟踪复发型与稳定期银屑病患者。', hospital: '中国医科大学硕士' },
-    { slug: 'zhao-xiao-jie', name: '赵小杰', shortName: '赵', title: '主治医师', department: '儿童皮肤科', rating: 4.7, years: 8, patients: '5.2k', articles: 9, fee: 240, color: 'orange', specialties: ['儿童湿疹', '皮炎', '荨麻疹'], intro: '重视儿童皮肤屏障修复与居家管理。', hospital: '首都医科大学硕士' },
-    { slug: 'sun-yan', name: '孙妍', shortName: '孙', title: '副主任医师', department: '激光美容科', rating: 4.8, years: 12, patients: '7.1k', articles: 11, fee: 320, color: 'orange', specialties: ['光电嫩肤', '痘印色沉', '敏感肌修护'], intro: '擅长根据肤质和恢复期要求设计分层光电方案。', hospital: '上海交通大学医学院硕士' },
-    { slug: 'gao-lin', name: '高琳', shortName: '高', title: '副主任医师', department: '过敏皮肤科', rating: 4.8, years: 14, patients: '7.8k', articles: 14, fee: 280, color: 'purple', specialties: ['慢性荨麻疹', '特应性皮炎', '接触性皮炎'], intro: '长期从事过敏性皮肤病与慢病管理门诊。', hospital: '首都医科大学博士' }
+    {
+      id: '2',
+      name: '李雪梅',
+      title: '副主任医师',
+      department: '儿童皮肤科',
+      hospital: '复旦大学医学院',
+      experience: 18,
+      score: 4.9,
+      cases: 12000,
+      specialties: ['儿童白癜风', '儿童湿疹', '儿童过敏性皮肤病'],
+      tags: ['儿童皮肤专家', '温柔耐心']
+    },
+    {
+      id: '3',
+      name: '张明远',
+      title: '主任医师',
+      department: '银屑病科',
+      hospital: '中国医学科学院',
+      experience: 22,
+      score: 4.8,
+      cases: 13500,
+      specialties: ['难治性银屑病', '生物制剂治疗', '银屑病关节炎'],
+      tags: ['银屑病权威', '生物制剂专家']
+    },
+    {
+      id: '4',
+      name: '陈志远',
+      title: '副主任医师',
+      department: '白癜风科',
+      hospital: '北京大学医学部',
+      experience: 15,
+      score: 4.8,
+      cases: 9800,
+      specialties: ['308激光治疗', '光疗', '白癜风外科治疗'],
+      tags: ['激光治疗专家']
+    },
+    {
+      id: '5',
+      name: '刘芳芳',
+      title: '主治医师',
+      department: '银屑病科',
+      hospital: '北京中医药大学',
+      experience: 10,
+      score: 4.7,
+      cases: 6500,
+      specialties: ['银屑病中医调理', '中西医结合治疗'],
+      tags: ['中西医结合', '银屑病管理']
+    },
+    {
+      id: '6',
+      name: '赵小燕',
+      title: '主治医师',
+      department: '儿童皮肤科',
+      hospital: '首都医科大学',
+      experience: 8,
+      score: 4.7,
+      cases: 5200,
+      specialties: ['儿童过敏性皮肤病', '儿童荨麻疹'],
+      tags: ['儿童过敏专家', '湿疹特病']
+    },
+    {
+      id: '7',
+      name: '孙美华',
+      title: '副主任医师',
+      department: '激光美容科',
+      hospital: '上海交通大学医学院',
+      experience: 12,
+      score: 4.7,
+      cases: 8900,
+      specialties: ['激光美容', '皮肤年轻化', '色斑治疗'],
+      tags: ['激光美容专家', '抗衰管理']
+    },
+    {
+      id: '8',
+      name: '周海涛',
+      title: '主任医师',
+      department: '过敏皮肤科',
+      hospital: '中国协和医科大学',
+      experience: 20,
+      score: 4.8,
+      cases: 11000,
+      specialties: ['过敏性皮肤病', '脱敏治疗', '荨麻疹'],
+      tags: ['过敏脱敏权威', '特应性皮炎']
+    }
   ],
   articles: [
     {
