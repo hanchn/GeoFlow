@@ -1,31 +1,36 @@
+/* CSS 变量与基础样式重置 */
 :root {
   color-scheme: light;
   
-  /* 颜色系统 */
-  --bg: #f5f7fb;
-  --surface: #ffffff;
-  --surface-soft: #f8fafc;
-  --line: #e2e8f0;
+  /* 品牌色 */
+  --primary: #1864ff;
+  --primary-hover: #1052d4;
+  --primary-soft: #eef4ff;
   
-  --text: #0f172a;
-  --text-soft: #64748b;
-  --text-lighter: #94a3b8;
-  
-  --primary: #2563eb;
-  --primary-dark: #1d4ed8;
-  --primary-soft: #eff6ff;
-  
-  --navy: #0f172a;
+  /* 辅助色 */
+  --navy: #18181b;
+  --navy-light: #27272a;
   --green: #10b981;
   --orange: #f59e0b;
-  --purple: #8b5cf6;
-  --pink: #ec4899;
-
+  --red: #ef4444;
+  
+  /* 文本色 */
+  --text: #111827;
+  --text-soft: #4b5563;
+  --text-lighter: #9ca3af;
+  
+  /* 背景与边框 */
+  --bg-page: #f3f4f6; /* 全局浅灰背景 */
+  --surface: #ffffff;
+  --surface-soft: #f1f5f9;
+  --line: #e2e8f0;
+  
   /* 排版系统 */
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   --radius-sm: 4px;
   --radius-md: 8px;
-  --radius-lg: 16px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
   --radius-full: 9999px; /* 恢复 PRD 图中的胶囊大圆角 */
   
   --shadow-sm: 0 2px 8px 0 rgb(0 0 0 / 0.04);
@@ -46,10 +51,30 @@ html {
 
 body {
   margin: 0;
-  background: var(--bg);
+  background: var(--bg-page); /* 应用浅灰背景 */
   color: var(--text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* 两列/侧边栏布局 */
+.layout-sidebar {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 24px;
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .layout-sidebar {
+    grid-template-columns: 1fr;
+  }
 }
 
 a {
