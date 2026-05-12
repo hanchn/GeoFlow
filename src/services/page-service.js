@@ -19,7 +19,8 @@ function buildPageHero(title, subtitle, breadcrumbs) {
 }
 
 function getAuthor(slug) {
-  return content.doctors.find((item) => item.slug === slug) || content.doctors[0];
+  const experts = content.experts || content.doctors || [];
+  return experts.find((item) => item.slug === slug || item.id === slug) || experts[0];
 }
 
 function getCaseStudy(slug) {
@@ -85,7 +86,7 @@ function getExpertDetailPage(site, slug) {
   return {
     ...buildShell(site, 'experts'),
     doctor,
-    relatedDoctors: content.experts ? content.experts.filter((item) => item.slug !== doctor.slug && item.id !== doctor.id).slice(0, 3) : content.doctors.filter((item) => item.slug !== doctor.slug).slice(0, 3),
+    relatedDoctors: content.experts ? content.experts.filter((item) => item.slug !== doctor.slug && item.id !== doctor.id).slice(0, 3) : [],
     breadcrumbs: [
       { label: '首页', href: '/' },
       { label: '专家团队', href: '/experts' },
@@ -164,7 +165,7 @@ function getCasesPage(site) {
     featuredCase: content.caseStudies[0],
     caseStudies: content.caseStudies,
     caseCategories: ['全部', '白癜风', '银屑病', '儿童皮肤'],
-    recommendedDoctors: content.doctors.slice(0, 3)
+    recommendedDoctors: content.experts ? content.experts.slice(0, 3) : []
   };
 }
 
