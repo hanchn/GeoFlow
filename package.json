@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "APP_ENV=development APP_LOGGER=false nodemon -e js,njk,css,json server.js",
     "start": "APP_ENV=testing APP_LOGGER=false nodemon -e js,njk,css,json server.js",
-    "restart": "APP_ENV=development APP_LOGGER=false nodemon -e js,njk,css,json server.js",
+    "restart": "lsof -ti:3000 | xargs kill -9 2>/dev/null || true && APP_ENV=development APP_LOGGER=false nodemon -e js,njk,css,json server.js",
+    "stop": "lsof -ti:3000 | xargs kill -9 2>/dev/null || true",
     "start:dev": "APP_ENV=development node --watch server.js",
     "start:test": "APP_ENV=testing node server.js",
     "start:staging": "APP_ENV=staging node server.js",
