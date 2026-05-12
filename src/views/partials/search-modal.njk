@@ -1,0 +1,17 @@
+<div class="search-modal" data-search-modal hidden>
+  <div class="search-dialog">
+    <div class="search-head">
+      <input class="search-input" type="text" placeholder="搜索疾病、医生、科室..." />
+      <button class="search-close" type="button" data-search-close>×</button>
+    </div>
+
+    <div class="search-body">
+      <p class="search-title">热门搜索</p>
+      <div class="tag-cloud">
+        {% for item in searchSuggestions %}
+        <span class="tag-chip">{{ item }}</span>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>

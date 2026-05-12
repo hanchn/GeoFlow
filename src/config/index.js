@@ -34,6 +34,19 @@ const jobs = {
   ...environmentConfig.jobs
 };
 
+const database = {
+  ...common.database,
+  ...environmentConfig.database,
+  mysql: {
+    ...common.database.mysql,
+    ...(environmentConfig.database && environmentConfig.database.mysql)
+  },
+  postgresql: {
+    ...common.database.postgresql,
+    ...(environmentConfig.database && environmentConfig.database.postgresql)
+  }
+};
+
 const swagger = {
   enabled: Boolean(environmentConfig.swagger && environmentConfig.swagger.enabled)
 };
@@ -46,6 +59,7 @@ module.exports = {
   view,
   assets,
   jobs,
+  database,
   swagger,
   site
 };

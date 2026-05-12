@@ -1,0 +1,9 @@
+<article class="review-card">
+  <div class="review-head">
+    <strong>{{ reviewItem.user }}</strong>
+    <span>{{ reviewItem.label or '' }}</span>
+    <span>★ {{ reviewItem.score }}</span>
+  </div>
+  <p>{{ reviewItem.text }}</p>
+  <small>{{ reviewItem.date }}</small>
+</article>

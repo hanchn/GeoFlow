@@ -3,21 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{ title }} | {{ site.titleSuffix or 'GeoFlow' }}</title>
+    <title>{{ title }} | {{ site.titleSuffix }}</title>
+    <meta name="description" content="{{ site.seo.description }}" />
     <link rel="stylesheet" href="/public/assets/styles/main.css" />
   </head>
-  <body>
-    <header class="site-header">
-      <div class="container">
-        <a class="brand" href="/">{{ site.name or 'GeoFlow' }}</a>
-        <span class="env-badge">{{ currentEnv or "development" }}</span>
-      </div>
-    </header>
+  <body class="{{ bodyClass or '' }}">
+    {% include "partials/site-header.njk" %}
+    {% include "partials/search-modal.njk" %}
 
-    <main class="container">
+    <main class="site-main">
       {% block content %}{% endblock %}
     </main>
 
+    {% include "partials/site-footer.njk" %}
     <script src="/public/assets/scripts/main.js"></script>
   </body>
 </html>

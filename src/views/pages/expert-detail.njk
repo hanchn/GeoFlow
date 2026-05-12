@@ -1,0 +1,109 @@
+{% extends "layouts/base.njk" %}
+
+{% block content %}
+<section class="container content-section detail-layout">
+  <div class="page-stack">
+    <article class="card-surface profile-hero">
+      <div class="doctor-card-head">
+        <span class="doctor-avatar">{{ doctor.shortName }}</span>
+        <div>
+          <nav class="breadcrumbs compact-breadcrumbs">
+            {% for item in breadcrumbs %}
+            <a href="{{ item.href }}">{{ item.label }}</a>{% if not loop.last %}<span>›</span>{% endif %}
+            {% endfor %}
+          </nav>
+          <h1>{{ doctor.name }}</h1>
+          <p>{{ doctor.title }} · {{ doctor.department }}</p>
+          <div class="tag-cloud compact">
+            {% for item in doctor.specialties %}
+            <span class="tag-chip">{{ item }}</span>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+      <p class="detail-intro">{{ doctor.intro }}</p>
+
+      <div class="detail-stats">
+        <div><strong>{{ doctor.years }}年</strong><span>从业经验</span></div>
+        <div><strong>{{ doctor.patients }}</strong><span>诊治病例</span></div>
+        <div><strong>{{ doctor.rating }}</strong><span>患者评分</span></div>
+        <div><strong>¥{{ doctor.fee }}</strong><span>挂号费</span></div>
+      </div>
+    </article>
+
+    <article class="card-surface">
+      <h2>教育背景</h2>
+      <ul class="simple-list">
+        {% for item in doctor.education or [doctor.hospital] %}
+        <li>{{ item }}</li>
+        {% endfor %}
+      </ul>
+    </article>
+
+    <article class="card-surface">
+      <h2>从业经历</h2>
+      <ul class="simple-list">
+        {% for item in doctor.journey or [doctor.intro] %}
+        <li>{{ item }}</li>
+        {% endfor %}
+      </ul>
+    </article>
+
+    <article class="card-surface">
+      <h2>学术成果</h2>
+      <ul class="simple-list">
+        {% for item in doctor.awards or doctor.specialties %}
+        <li>{{ item }}</li>
+        {% endfor %}
+      </ul>
+    </article>
+
+    <article class="card-surface">
+      <h2>代表论文</h2>
+      <ul class="simple-list">
+        {% for item in doctor.papers or doctor.specialties %}
+        <li>{{ item }}</li>
+        {% endfor %}
+      </ul>
+    </article>
+
+    <article class="card-surface">
+      <div class="section-title with-link inner-title">
+        <div>
+          <h2>患者评价</h2>
+          <p>医生门诊服务的典型反馈。</p>
+        </div>
+        <span>★ {{ doctor.rating }}</span>
+      </div>
+      <div class="review-grid single-column">
+        {% for review in doctor.reviews or [] %}
+        {% set reviewItem = review %}
+        {% include "components/review-card.njk" %}
+        {% endfor %}
+      </div>
+    </article>
+  </div>
+
+  <aside class="detail-sidebar">
+    <article class="card-surface sticky-card">
+      <h2>预约 {{ doctor.name }}</h2>
+      <p>挂号费 ¥{{ doctor.fee }}</p>
+      <div class="button-stack">
+        <a class="button primary" href="{{ site.appointmentPath }}">立即预约</a>
+        <a class="button secondary" href="tel:{{ site.phone }}">电话咨询</a>
+      </div>
+    </article>
+
+    <article class="card-surface">
+      <h2>同科室医生</h2>
+      <div class="doctor-grid">
+        {% for item in relatedDoctors %}
+        {% set cardDoctor = item %}
+        {% include "components/doctor-card.njk" %}
+        {% endfor %}
+      </div>
+    </article>
+  </aside>
+</section>
+{% endblock %}

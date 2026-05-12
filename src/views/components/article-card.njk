@@ -1,0 +1,17 @@
+<article class="article-card">
+  <span class="article-category">{{ cardArticle.category }}</span>
+  <h3><a href="/articles/{{ cardArticle.slug }}">{{ cardArticle.title }}</a></h3>
+  <p>{{ cardArticle.excerpt }}</p>
+
+  <div class="article-meta">
+    <span>{{ cardArticle.publishDate }}</span>
+    <span>{{ cardArticle.readingTime }}</span>
+    <span>{{ cardArticle.views }} 阅读</span>
+  </div>
+
+  <div class="tag-cloud compact">
+    {% for tag in cardArticle.tags %}
+    <span class="tag-chip muted">{{ tag }}</span>
+    {% endfor %}
+  </div>
+</article>

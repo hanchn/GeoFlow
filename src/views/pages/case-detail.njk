@@ -1,0 +1,101 @@
+{% extends "layouts/base.njk" %}
+
+{% block content %}
+<section class="container content-section detail-layout">
+  <div class="page-stack">
+    <article class="card-surface article-detail-hero">
+      <nav class="breadcrumbs compact-breadcrumbs">
+        {% for item in breadcrumbs %}
+        <a href="{{ item.href }}">{{ item.label }}</a>{% if not loop.last %}<span>›</span>{% endif %}
+        {% endfor %}
+      </nav>
+      <span class="article-category">{{ caseStudy.category }}</span>
+      <h1>{{ caseStudy.title }}</h1>
+      <div class="article-meta">
+        <span>{{ caseStudy.patientLabel }}</span>
+        <span>{{ doctor.name }}</span>
+        <span>{{ caseStudy.publishDate }}</span>
+      </div>
+      <p class="detail-intro">{{ caseStudy.summary }}</p>
+      <div class="tag-cloud compact">
+        {% for tag in caseStudy.tags %}
+        <span class="tag-chip">{{ tag }}</span>
+        {% endfor %}
+      </div>
+    </article>
+
+    <article class="card-surface">
+      <h2>治疗过程节点</h2>
+      <div class="timeline-list">
+        {% for item in caseStudy.timeline %}
+        <div class="timeline-item">
+          <strong>{{ item.stage }}</strong>
+          <p>{{ item.detail }}</p>
+        </div>
+        {% endfor %}
+      </div>
+    </article>
+
+    <article class="card-surface">
+      <h2>案例要点</h2>
+      <ul class="simple-list">
+        {% for item in caseStudy.highlights %}
+        <li>{{ item }}</li>
+        {% endfor %}
+      </ul>
+    </article>
+
+    <article class="card-surface">
+      <h2>案例问答</h2>
+      <div class="faq-list">
+        {% for item in caseStudy.qa %}
+        {% set faqItem = item %}
+        {% include "components/faq-item.njk" %}
+        {% endfor %}
+      </div>
+    </article>
+
+    <article class="card-surface">
+      <div class="section-title with-link inner-title">
+        <div>
+          <h2>相关案例</h2>
+          <p>查看更多同类患者的治疗与管理路径。</p>
+        </div>
+        <a href="/cases">查看全部</a>
+      </div>
+      <div class="case-list compact-case-list">
+        {% for item in relatedCases %}
+        {% set caseItem = item %}
+        {% include "components/case-card.njk" %}
+        {% endfor %}
+      </div>
+    </article>
+  </div>
+
+  <aside class="detail-sidebar">
+    <article class="card-surface sticky-card">
+      <h2>主诊医生</h2>
+      <div class="doctor-card-head">
+        <span class="doctor-avatar">{{ doctor.shortName }}</span>
+        <div>
+          <strong>{{ doctor.name }}</strong>
+          <p>{{ doctor.department }} · {{ doctor.title }}</p>
+        </div>
+      </div>
+      <div class="button-stack">
+        <a class="button primary" href="/experts/{{ doctor.slug }}">咨询医生</a>
+        <a class="button secondary" href="tel:{{ site.phone }}">{{ site.phone }}</a>
+      </div>
+    </article>
+
+    <article class="card-surface">
+      <h2>案例指标</h2>
+      <div class="detail-stats case-sidebar-stats">
+        {% for item in caseStudy.heroStats %}
+        <div><strong>{{ item.value }}</strong><span>{{ item.label }}</span></div>
+        {% endfor %}
+      </div>
+    </article>
+  </aside>
+</section>
+{% endblock %}

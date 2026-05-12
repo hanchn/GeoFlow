@@ -1,0 +1,17 @@
+<article class="case-card card-surface">
+  <div class="meta-row">
+    <span class="article-category">{{ caseItem.category }}</span>
+    <span>{{ caseItem.publishDate }}</span>
+  </div>
+  <h3><a href="/cases/{{ caseItem.slug }}">{{ caseItem.title }}</a></h3>
+  <p>{{ caseItem.excerpt }}</p>
+  <div class="tag-cloud compact">
+    {% for tag in caseItem.tags %}
+    <span class="tag-chip muted">{{ tag }}</span>
+    {% endfor %}
+  </div>
+  <div class="case-card-footer">
+    <span>{{ caseItem.patientLabel }}</span>
+    <a href="/cases/{{ caseItem.slug }}">查看详情</a>
+  </div>
+</article>

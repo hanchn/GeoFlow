@@ -1,6 +1,7 @@
 const Fastify = require('fastify');
 const formbody = require('@fastify/formbody');
-const { app: appConfig, view, assets, site } = require('./config');
+const { app: appConfig, view, assets, site, database } = require('./config');
+const registerDatabase = require('./plugins/database');
 const registerView = require('./plugins/view');
 const registerStatic = require('./plugins/static');
 const registerErrorHandler = require('./plugins/error-handler');
@@ -16,7 +17,9 @@ function buildApp() {
   app.decorate('appEnv', appConfig.appEnv);
   app.decorate('appName', appConfig.appName);
   app.decorate('siteConfig', site);
+  app.decorate('databaseSettings', database);
   app.register(formbody);
+  app.register(registerDatabase);
   app.register(registerView, view);
   app.register(registerStatic, assets);
   app.register(registerSwagger);

@@ -1,10 +1,11 @@
-const { app, site } = require('../config');
+const { app, site, database } = require('../config');
 const homeService = require('../services/home-service');
 
 async function renderHome(request, reply) {
   const pageData = await homeService.getHomePageData({
     app,
-    site
+    site,
+    database
   });
 
   return reply.view('pages/home.njk', {

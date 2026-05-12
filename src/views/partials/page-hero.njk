@@ -1,0 +1,11 @@
+<section class="page-hero">
+  <div class="container">
+    <nav class="breadcrumbs">
+      {% for item in pageHero.breadcrumbs %}
+      <a href="{{ item.href }}">{{ item.label }}</a>{% if not loop.last %}<span>›</span>{% endif %}
+      {% endfor %}
+    </nav>
+    <h1>{{ pageHero.title }}</h1>
+    <p>{{ pageHero.subtitle }}</p>
+  </div>
+</section>

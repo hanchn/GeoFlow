@@ -1,0 +1,60 @@
+{% extends "layouts/base.njk" %}
+
+{% block content %}
+{% include "partials/page-hero.njk" %}
+
+<section class="container content-section two-column-page">
+  <aside class="side-tabs card-surface">
+    {% for item in departmentTabs %}
+    <a class="side-tab {% if item.slug == department.slug %}is-active{% endif %}" href="/departments/{{ item.slug }}">{{ item.name }}</a>
+    {% endfor %}
+  </aside>
+
+  <div class="page-stack">
+    <article class="card-surface intro-panel">
+      <h2>{{ department.name }}</h2>
+      <div class="meta-row">
+        {% for item in department.stats %}
+        <span>{{ item }}</span>
+        {% endfor %}
+      </div>
+      <p>{{ department.summary }}</p>
+    </article>
+
+    <article class="card-surface">
+      <h2>主要治疗项目</h2>
+      <div class="tag-cloud">
+        {% for item in department.projects %}
+        <span class="tag-chip">{{ item }}</span>
+        {% endfor %}
+      </div>
+    </article>
+
+    <article class="card-surface">
+      <div class="section-title with-link inner-title">
+        <div>
+          <h2>科室专家</h2>
+          <p>专病方向匹配的核心医生。</p>
+        </div>
+        <a href="/experts">查看全部</a>
+      </div>
+      <div class="doctor-grid">
+        {% for doctor in experts %}
+        {% set cardDoctor = doctor %}
+        {% include "components/doctor-card.njk" %}
+        {% endfor %}
+      </div>
+    </article>
+
+    <article class="card-surface">
+      <h2>常见问题</h2>
+      <div class="faq-list">
+        {% for item in department.questions %}
+        {% set faqItem = item %}
+        {% include "components/faq-item.njk" %}
+        {% endfor %}
+      </div>
+    </article>
+  </div>
+</section>
+{% endblock %}

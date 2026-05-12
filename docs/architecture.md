@@ -59,6 +59,12 @@ Use a dedicated Fastify plugin to centralize:
 
 This keeps controllers focused on normal business flow.
 
+## Cross-Origin Policy
+
+- Node.js service does not configure CORS headers by default.
+- Cross-origin policy is handled uniformly at the Nginx layer.
+- Avoid registering `@fastify/cors` unless deployment strategy changes.
+
 ## Commit Guardrails
 
 Recommended commit protection chain:

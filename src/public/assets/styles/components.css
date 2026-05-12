@@ -1,0 +1,249 @@
+.brand {
+  gap: 12px;
+  font-size: 15px;
+}
+
+.brand strong,
+.doctor-card h3,
+.article-card h3,
+.page-hero h1,
+.empty-state h1 {
+  font-size: 28px;
+}
+
+.brand small,
+.contact-note,
+.footer-meta,
+.article-meta,
+.doctor-rating,
+.doctor-intro,
+.detail-intro,
+.search-title,
+.card-actions,
+.meta-row,
+.article-card p,
+.simple-list,
+.review-card small {
+  color: var(--text-soft);
+}
+
+.brand-mark,
+.doctor-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary);
+  color: #ffffff;
+  font-weight: 800;
+}
+
+.nav-link,
+.filter-chip,
+.tag-chip,
+.search-button,
+.header-phone,
+.button,
+.side-tab {
+  border-radius: 999px;
+}
+
+.nav-link {
+  padding: 10px 0;
+  color: var(--text-soft);
+}
+
+.nav-link.is-active,
+.filter-chip.is-active,
+.side-tab.is-active {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.card-surface,
+.doctor-card,
+.article-card,
+.process-card,
+.contact-card,
+.review-card,
+.faq-item,
+.search-dialog {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  box-shadow: 0 12px 32px rgba(25, 47, 89, 0.06);
+}
+
+.card-surface,
+.doctor-card,
+.article-card,
+.process-card,
+.contact-card,
+.review-card,
+.search-dialog {
+  padding: 24px;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 18px;
+  font-weight: 700;
+}
+
+.button.primary,
+.header-action.primary {
+  background: var(--primary);
+  color: #ffffff;
+}
+
+.button.secondary,
+.search-button,
+.header-phone {
+  background: var(--blue-soft);
+  color: var(--primary);
+}
+
+.tag-chip,
+.filter-chip {
+  display: inline-flex;
+  padding: 8px 14px;
+  background: var(--blue-soft);
+  color: var(--primary);
+  font-size: 13px;
+}
+
+.tag-chip.muted,
+.filter-chip {
+  background: #f2f4f8;
+  color: var(--text-soft);
+}
+
+.doctor-grid,
+.review-grid,
+.process-grid,
+.contact-grid,
+.article-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.doctor-grid,
+.article-grid,
+.review-grid,
+.process-grid,
+.contact-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.doctor-card,
+.article-card,
+.case-card,
+.review-card,
+.contact-card {
+  display: grid;
+  gap: 14px;
+}
+
+.doctor-stats,
+.article-meta,
+.review-head,
+.meta-row {
+  flex-wrap: wrap;
+  gap: 14px;
+  font-size: 13px;
+}
+
+.doctor-card-head {
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.doctor-card-blue .doctor-avatar { background: var(--primary); }
+.doctor-card-orange .doctor-avatar { background: var(--orange); }
+.doctor-card-purple .doctor-avatar { background: var(--purple); }
+
+.doctor-rating,
+.article-category {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.faq-list {
+  display: grid;
+  gap: 14px;
+}
+
+.faq-item:not(.is-open) .faq-answer {
+  display: none;
+}
+
+.case-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--text-soft);
+}
+
+.faq-question {
+  width: 100%;
+  padding: 18px 20px;
+  border: 0;
+  background: transparent;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.faq-answer {
+  padding: 0 20px 18px;
+}
+
+.simple-list {
+  display: grid;
+  gap: 12px;
+}
+
+.simple-list li {
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: var(--surface-soft);
+}
+
+.search-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: rgba(12, 22, 44, 0.4);
+  padding: 54px 16px;
+}
+
+.search-dialog {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.search-input,
+.article-search {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 16px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #ffffff;
+}
+
+.search-close {
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 12px;
+  background: #f2f4f8;
+  cursor: pointer;
+}

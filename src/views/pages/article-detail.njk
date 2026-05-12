@@ -1,0 +1,112 @@
+{% extends "layouts/base.njk" %}
+
+{% block content %}
+<section class="container content-section detail-layout">
+  <div class="page-stack">
+    <article class="card-surface article-detail-hero">
+      <nav class="breadcrumbs compact-breadcrumbs">
+        {% for item in breadcrumbs %}
+        <a href="{{ item.href }}">{{ item.label }}</a>{% if not loop.last %}<span>›</span>{% endif %}
+        {% endfor %}
+      </nav>
+      <span class="article-category">{{ article.category }}</span>
+      <h1>{{ article.title }}</h1>
+      <div class="article-meta">
+        <span>{{ author.name }}</span>
+        <span>{{ article.publishDate }}</span>
+        <span>{{ article.views }} 阅读</span>
+        <span>{{ article.readingTime }}</span>
+      </div>
+      <p class="detail-intro">{{ article.excerpt }}</p>
+      <div class="tag-cloud compact">
+        {% for tag in article.tags %}
+        <span class="tag-chip">{{ tag }}</span>
+        {% endfor %}
+      </div>
+    </article>
+
+    <article class="card-surface">
+      <h2>2026 年主流治疗方案对比</h2>
+      <div class="table-wrap">
+        <table class="comparison-table">
+          <thead>
+            <tr><th>方案</th><th>适用人群</th><th>疗程</th><th>特点</th></tr>
+          </thead>
+          <tbody>
+            {% for row in detailTable %}
+            <tr>
+              {% for col in row %}<td>{{ col }}</td>{% endfor %}
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </article>
+
+    {% for item in detailSections %}
+    <article class="card-surface">
+      <h2>{{ loop.index }}. 诊疗重点</h2>
+      <p>{{ item }}</p>
+    </article>
+    {% endfor %}
+
+    <article class="card-surface">
+      <div class="section-title with-link inner-title">
+        <div>
+          <h2>患者常见问题</h2>
+          <p>围绕诊疗、复发和长期管理的高频问题。</p>
+        </div>
+        <span>FAQPage Schema</span>
+      </div>
+      <div class="faq-list">
+        {% for item in detailFaqs %}
+        {% set faqItem = { question: item, answer: '建议结合病程、部位、分型和既往治疗史，由专病医生综合判断。' } %}
+        {% include "components/faq-item.njk" %}
+        {% endfor %}
+      </div>
+    </article>
+
+    <article class="card-surface">
+      <h2>参考文献</h2>
+      <ul class="simple-list">
+        {% for item in references %}
+        <li>{{ item }}</li>
+        {% endfor %}
+      </ul>
+    </article>
+
+    <article class="card-surface">
+      <div class="section-title with-link inner-title">
+        <div>
+          <h2>患者评价</h2>
+          <p>文章内容的读者反馈。</p>
+        </div>
+        <span>★ 4.8</span>
+      </div>
+      <div class="review-grid single-column">
+        {% for review in articleReviews %}
+        {% set reviewItem = review %}
+        {% include "components/review-card.njk" %}
+        {% endfor %}
+      </div>
+    </article>
+  </div>
+
+  <aside class="detail-sidebar">
+    <article class="card-surface sticky-card">
+      <h2>责任编辑</h2>
+      <div class="doctor-card-head">
+        <span class="doctor-avatar">{{ author.shortName }}</span>
+        <div>
+          <strong>{{ author.name }}</strong>
+          <p>{{ author.department }} · {{ author.title }}</p>
+        </div>
+      </div>
+      <div class="button-stack">
+        <a class="button primary" href="/experts/{{ author.slug }}">咨询医生</a>
+        <a class="button secondary" href="tel:{{ site.phone }}">{{ site.phone }}</a>
+      </div>
+    </article>
+  </aside>
+</section>
+{% endblock %}

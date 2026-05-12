@@ -1,0 +1,23 @@
+<header class="site-header">
+  <div class="container header-bar">
+    <a class="brand" href="/">
+      <span class="brand-mark">医</span>
+      <span>
+        <strong>{{ site.name }}</strong>
+        <small>专业化 · 权威 · 可追踪</small>
+      </span>
+    </a>
+
+    <nav class="site-nav">
+      {% for item in navItems %}
+      <a class="nav-link {% if activeNav == item.key %}is-active{% endif %}" href="{{ item.href }}">{{ item.label }}</a>
+      {% endfor %}
+    </nav>
+
+    <div class="header-actions">
+      <button class="search-button" type="button" data-search-open>搜索</button>
+      <a class="header-action primary" href="{{ site.appointmentPath }}">预约挂号</a>
+      <a class="header-phone" href="tel:{{ site.phone }}">{{ site.phone }}</a>
+    </div>
+  </div>
+</header>

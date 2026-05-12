@@ -11,6 +11,8 @@ npm start
 
 默认启动环境：`testing`
 
+本地 `npm start` 和 `npm run dev` 默认开启 Node `--watch` 热更新。
+
 默认站点：`default`
 
 ## Environments
@@ -32,6 +34,7 @@ npm start
 
 ```bash
 npm start
+npm run dev
 npm run start:dev
 npm run start:test
 npm run start:staging
@@ -118,5 +121,6 @@ GeoFlow/
 - `src/messages/` 管理成功、警告、异常消息常量。
 - `src/views/layouts/` 和 `src/views/pages/404.njk`、`500.njk` 是基础页面能力。
 - 非生产环境自动开放 Swagger 文档 `/docs`。
+- Node.js 服务默认不设置 CORS/跨域响应头，跨域策略统一由 Nginx 负责。
 
 See `docs/architecture.md` for the detailed architecture design.

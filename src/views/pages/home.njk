@@ -1,38 +1,131 @@
 {% extends "layouts/base.njk" %}
 
 {% block content %}
-<section class="hero">
-  <p class="eyebrow">GEO C-end Boilerplate</p>
-  <h1>{{ heroTitle }}</h1>
-  <p class="subtitle">{{ heroSubtitle }}</p>
+<section class="home-hero">
+  <div class="container hero-grid">
+    <div class="hero-copy card-surface">
+      <p class="eyebrow">汇聚白癜风及皮肤专病</p>
+      <h1>{{ heroTitle }}</h1>
+      <p class="subtitle">{{ heroSubtitle }}</p>
 
-  <div class="panel">
-    <h2>当前环境</h2>
-    <p>{{ currentEnv }}</p>
+      <div class="hero-stats">
+        {% for item in heroStats %}
+        <div>
+          <strong>{{ item.value }}</strong>
+          <span>{{ item.label }}</span>
+        </div>
+        {% endfor %}
+      </div>
+
+      <div class="button-row">
+        <a class="button primary" href="/experts">立即预约</a>
+        <a class="button secondary" href="/articles">了解治疗方案</a>
+      </div>
+    </div>
+
+    <div class="hero-form card-surface">
+      <h2>免费在线咨询</h2>
+      <p>由专业医生团队评估方向，帮助你快速匹配科室和医生。</p>
+      <div class="appointment-list">
+        <span>白癜风治疗方案</span>
+        <span>银屑病反复发作</span>
+        <span>儿童皮肤病门诊</span>
+        <span>308 激光是否适合</span>
+      </div>
+      <div class="button-stack">
+        <a class="button primary" href="/experts">提交需求</a>
+        <a class="button secondary" href="tel:{{ site.phone }}">{{ site.phone }}</a>
+      </div>
+    </div>
   </div>
+</section>
 
-  <div class="panel">
-    <h2>当前站点</h2>
-    <p>站点编码：{{ currentSite }}</p>
-    <p>站点域名：{{ siteHost }}</p>
+<section class="container content-section">
+  <div class="section-title with-link">
+    <div>
+      <h2>专家团队</h2>
+      <p>围绕白癜风、银屑病、儿童皮肤等专病方向建立多学科团队。</p>
+    </div>
+    <a href="/experts">查看全部</a>
   </div>
-
-  <div class="panel">
-    <h2>支持环境</h2>
-    <ul class="feature-list">
-      {% for envItem in environmentList %}
-      <li>{{ envItem }}</li>
-      {% endfor %}
-    </ul>
+  <div class="doctor-grid">
+    {% for doctor in featuredDoctors %}
+    {% set cardDoctor = doctor %}
+    {% include "components/doctor-card.njk" %}
+    {% endfor %}
   </div>
+</section>
 
-  <div class="panel">
-    <h2>基础能力</h2>
-    <ul class="feature-list">
-      {% for item in features %}
-      <li>{{ item }}</li>
-      {% endfor %}
-    </ul>
+<section class="container content-section">
+  <div class="section-title with-link">
+    <div>
+      <h2>科普文章</h2>
+      <p>从病因、治疗到长期管理，帮助患者建立更清晰的诊疗认知。</p>
+    </div>
+    <a href="/articles">查看更多</a>
+  </div>
+  <div class="article-grid compact-grid">
+    {% for article in featuredArticles %}
+    {% set cardArticle = article %}
+    {% include "components/article-card.njk" %}
+    {% endfor %}
+  </div>
+</section>
+
+<section class="container content-section">
+  <div class="section-title">
+    <h2>就医流程</h2>
+    <p>从初诊评估到治疗随访，全流程节点清晰可追踪。</p>
+  </div>
+  <div class="process-grid">
+    {% for item in processSteps %}
+    <article class="process-card">
+      <h3>{{ loop.index }}. {{ item.title }}</h3>
+      <p>{{ item.text }}</p>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="container content-section" id="patient-stories">
+  <div class="section-title with-link">
+    <div>
+      <h2>患者评价</h2>
+      <p>来自门诊患者的真实反馈。</p>
+    </div>
+    <a href="/cases">查看更多案例</a>
+  </div>
+  <div class="review-grid">
+    {% for review in patientStories %}
+    {% set reviewItem = review %}
+    {% include "components/review-card.njk" %}
+    {% endfor %}
+  </div>
+</section>
+
+<section class="container content-section">
+  <div class="section-title">
+    <h2>常见问题</h2>
+    <p>围绕高频问题整理基础判断与就诊建议。</p>
+  </div>
+  <div class="faq-list">
+    {% for item in homeFaqs %}
+    {% set faqItem = item %}
+    {% include "components/faq-item.njk" %}
+    {% endfor %}
+  </div>
+</section>
+
+<section class="container content-section">
+  <div class="section-title">
+    <h2>联系我们</h2>
+    <p>电话、地址与门诊时间一目了然。</p>
+  </div>
+  <div class="contact-grid">
+    {% for item in contactCards %}
+    {% set contactItem = item %}
+    {% include "components/contact-card.njk" %}
+    {% endfor %}
   </div>
 </section>
 {% endblock %}

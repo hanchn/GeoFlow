@@ -6,6 +6,10 @@ module.exports = {
   swagger: {
     enabled: true
   },
+  database: {
+    enabled: false,
+    client: 'mysql'
+  },
   jobs: {
     enabled: true
   }

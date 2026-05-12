@@ -1,0 +1,46 @@
+{% extends "layouts/base.njk" %}
+
+{% block content %}
+{% include "partials/page-hero.njk" %}
+
+<section class="container content-section detail-layout">
+  <div class="page-stack">
+    <div class="card-surface search-bar-panel">
+      <input class="article-search" type="text" placeholder="搜索疾病、治疗方式..." />
+      <div class="tag-cloud compact">
+        {% for item in categories %}
+        <span class="filter-chip {% if loop.first %}is-active{% endif %}">{{ item }}</span>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="article-grid">
+      {% for article in articles %}
+      {% set cardArticle = article %}
+      {% include "components/article-card.njk" %}
+      {% endfor %}
+    </div>
+  </div>
+
+  <aside class="detail-sidebar">
+    <article class="card-surface">
+      <h2>推荐专家</h2>
+      <div class="doctor-grid">
+        {% for item in recommendedDoctors %}
+        {% set cardDoctor = item %}
+        {% include "components/doctor-card.njk" %}
+        {% endfor %}
+      </div>
+    </article>
+
+    <article class="card-surface">
+      <h2>热门标签</h2>
+      <div class="tag-cloud compact">
+        {% for item in hotTags %}
+        <span class="tag-chip muted">{{ item }}</span>
+        {% endfor %}
+      </div>
+    </article>
+  </aside>
+</section>
+{% endblock %}

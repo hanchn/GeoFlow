@@ -1,0 +1,59 @@
+{% extends "layouts/base.njk" %}
+
+{% block content %}
+{% include "partials/page-hero.njk" %}
+
+<section class="container content-section detail-layout">
+  <div class="page-stack">
+    <article class="card-surface case-featured">
+      <div class="section-title with-link inner-title">
+        <div>
+          <h2>精选案例</h2>
+          <p>聚焦病程、治疗节点与长期管理的真实变化。</p>
+        </div>
+        <a href="/cases/{{ featuredCase.slug }}">查看详情</a>
+      </div>
+      <div class="detail-stats case-hero-stats">
+        {% for item in featuredCase.heroStats %}
+        <div><strong>{{ item.value }}</strong><span>{{ item.label }}</span></div>
+        {% endfor %}
+      </div>
+      <h3>{{ featuredCase.title }}</h3>
+      <p>{{ featuredCase.summary }}</p>
+      <div class="tag-cloud compact">
+        {% for item in featuredCase.tags %}
+        <span class="tag-chip">{{ item }}</span>
+        {% endfor %}
+      </div>
+    </article>
+
+    <article class="card-surface search-bar-panel">
+      <input class="article-search" type="text" placeholder="搜索疾病、治疗方式或病程阶段..." />
+      <div class="tag-cloud compact">
+        {% for item in caseCategories %}
+        <span class="filter-chip {% if loop.first %}is-active{% endif %}">{{ item }}</span>
+        {% endfor %}
+      </div>
+    </article>
+
+    <div class="case-list">
+      {% for item in caseStudies %}
+      {% set caseItem = item %}
+      {% include "components/case-card.njk" %}
+      {% endfor %}
+    </div>
+  </div>
+
+  <aside class="detail-sidebar">
+    <article class="card-surface">
+      <h2>推荐专家</h2>
+      <div class="doctor-grid">
+        {% for item in recommendedDoctors %}
+        {% set cardDoctor = item %}
+        {% include "components/doctor-card.njk" %}
+        {% endfor %}
+      </div>
+    </article>
+  </aside>
+</section>
+{% endblock %}

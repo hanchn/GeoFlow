@@ -1,0 +1,20 @@
+{% extends "layouts/base.njk" %}
+
+{% block content %}
+{% include "partials/page-hero.njk" %}
+
+<section class="container content-section">
+  <div class="filter-tabs card-surface">
+    {% for item in tabs %}
+    <span class="filter-chip {% if loop.first %}is-active{% endif %}">{{ item }}</span>
+    {% endfor %}
+  </div>
+
+  <div class="doctor-grid">
+    {% for doctor in doctors %}
+    {% set cardDoctor = doctor %}
+    {% include "components/doctor-card.njk" %}
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

@@ -1,8 +1,15 @@
-const homeController = require('../controllers/home-controller');
+const siteController = require('../controllers/site-controller');
 const messages = require('../messages');
 
 async function routes(fastify) {
-  fastify.get('/', homeController.renderHome);
+  fastify.get('/', siteController.renderHome);
+  fastify.get('/departments/:slug', siteController.renderDepartment);
+  fastify.get('/experts', siteController.renderExperts);
+  fastify.get('/experts/:slug', siteController.renderExpertDetail);
+  fastify.get('/articles', siteController.renderArticles);
+  fastify.get('/articles/:slug', siteController.renderArticleDetail);
+  fastify.get('/cases', siteController.renderCases);
+  fastify.get('/cases/:slug', siteController.renderCaseDetail);
 
   fastify.get('/health', {
     schema: {

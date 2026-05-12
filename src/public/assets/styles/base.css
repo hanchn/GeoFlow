@@ -1,0 +1,58 @@
+:root {
+  color-scheme: light;
+  --bg: #eef3f9;
+  --surface: #ffffff;
+  --surface-soft: #f7f9fc;
+  --line: #dfe6f1;
+  --text: #1d2736;
+  --text-soft: #637287;
+  --primary: #1f68ea;
+  --primary-dark: #144db2;
+  --navy: #12192f;
+  --blue-soft: #e8f0ff;
+  --green: #27ae60;
+  --orange: #f39c12;
+  --purple: #8e44ad;
+  --pink: #e84393;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+img {
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3,
+p,
+ul {
+  margin: 0;
+}
+
+ul {
+  padding-left: 18px;
+}

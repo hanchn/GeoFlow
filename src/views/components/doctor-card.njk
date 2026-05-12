@@ -1,0 +1,29 @@
+<article class="doctor-card doctor-card-{{ cardDoctor.color }}">
+  <div class="doctor-card-head">
+    <span class="doctor-avatar">{{ cardDoctor.shortName }}</span>
+    <div>
+      <h3>{{ cardDoctor.name }}</h3>
+      <p>{{ cardDoctor.title }} · {{ cardDoctor.department }}</p>
+      <span class="doctor-rating">★ {{ cardDoctor.rating }} · 从业{{ cardDoctor.years }}年</span>
+    </div>
+  </div>
+
+  <p class="doctor-intro">擅长：{{ cardDoctor.intro }}</p>
+
+  <div class="doctor-stats">
+    <span>{{ cardDoctor.patients }} 累计患者</span>
+    <span>{{ cardDoctor.articles }} 科普文章</span>
+    <span>¥{{ cardDoctor.fee }} 挂号费</span>
+  </div>
+
+  <div class="tag-cloud compact">
+    {% for item in cardDoctor.specialties %}
+    <span class="tag-chip muted">{{ item }}</span>
+    {% endfor %}
+  </div>
+
+  <div class="card-actions">
+    <span class="doctor-hospital">{{ cardDoctor.hospital }}</span>
+    <a href="/experts/{{ cardDoctor.slug }}">查看详情</a>
+  </div>
+</article>
