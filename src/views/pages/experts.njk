@@ -1,20 +1,100 @@
 {% extends "layouts/base.njk" %}
 
 {% block content %}
-{% include "partials/page-hero.njk" %}
-
-<section class="container content-section">
-  <div class="filter-tabs card-surface">
-    {% for item in tabs %}
-    <span class="filter-chip {% if loop.first %}is-active{% endif %}">{{ item }}</span>
-    {% endfor %}
+<div class="page-hero">
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="/">首页</a>
+      <span>›</span>
+      <span>专家团队</span>
+    </div>
+    <h1>专家团队</h1>
+    <p>汇聚 8 位皮肤科权威专家，为您提供专业诊疗</p>
   </div>
+</div>
 
-  <div class="doctor-grid">
-    {% for doctor in doctors %}
-    {% set cardDoctor = doctor %}
-    {% include "components/doctor-card.njk" %}
-    {% endfor %}
+<div style="padding: 32px 0 64px;">
+  <div class="container">
+    
+    <!-- 筛选器 -->
+    <div class="filter-bar" style="background: #ffffff; padding: 16px 24px; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); margin-bottom: 32px; display: flex; align-items: center; gap: 32px; flex-wrap: wrap;">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <span style="color: var(--text-soft); font-size: 0.875rem;">科室：</span>
+        <div style="display: flex; gap: 8px;">
+          <a href="#" class="filter-chip is-active" style="padding: 4px 16px; border-radius: 16px; font-size: 0.875rem; text-decoration: none; background: #1864ff; color: #fff;">全部科室</a>
+          <a href="#" class="filter-chip" style="padding: 4px 16px; border-radius: 16px; font-size: 0.875rem; text-decoration: none; color: var(--text-soft);">白癜风科</a>
+          <a href="#" class="filter-chip" style="padding: 4px 16px; border-radius: 16px; font-size: 0.875rem; text-decoration: none; color: var(--text-soft);">银屑病科</a>
+          <a href="#" class="filter-chip" style="padding: 4px 16px; border-radius: 16px; font-size: 0.875rem; text-decoration: none; color: var(--text-soft);">儿童皮肤科</a>
+          <a href="#" class="filter-chip" style="padding: 4px 16px; border-radius: 16px; font-size: 0.875rem; text-decoration: none; color: var(--text-soft);">激光美容科</a>
+          <a href="#" class="filter-chip" style="padding: 4px 16px; border-radius: 16px; font-size: 0.875rem; text-decoration: none; color: var(--text-soft);">过敏皮肤科</a>
+        </div>
+      </div>
+      <div style="width: 1px; height: 16px; background: var(--line);"></div>
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <span style="color: var(--text-soft); font-size: 0.875rem;">职称：</span>
+        <div style="display: flex; gap: 8px;">
+          <a href="#" class="filter-chip is-active" style="padding: 4px 16px; border-radius: 16px; font-size: 0.875rem; text-decoration: none; background: #1864ff; color: #fff;">全部职称</a>
+          <a href="#" class="filter-chip" style="padding: 4px 16px; border-radius: 16px; font-size: 0.875rem; text-decoration: none; color: var(--text-soft);">主任医师</a>
+          <a href="#" class="filter-chip" style="padding: 4px 16px; border-radius: 16px; font-size: 0.875rem; text-decoration: none; color: var(--text-soft);">副主任医师</a>
+          <a href="#" class="filter-chip" style="padding: 4px 16px; border-radius: 16px; font-size: 0.875rem; text-decoration: none; color: var(--text-soft);">主治医师</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 专家网格 -->
+    <div class="expert-grid">
+      {% for item in experts %}
+      <div class="expert-card">
+        <div class="expert-card-head">
+          <div class="expert-card-avatar" style="{% if item.department == '儿童皮肤科' %}background: #f59e0b;{% elif item.department == '银屑病科' %}background: #8b5cf6;{% elif item.department == '过敏皮肤科' %}background: #10b981;{% elif item.department == '激光美容科' %}background: #ec4899;{% else %}background: #1864ff;{% endif %}">
+            {{ item.name | first }}
+          </div>
+          <div class="expert-card-info">
+            <h3 class="expert-card-name">{{ item.name }} <small>{{ item.title }}</small></h3>
+            <div class="expert-card-meta">
+              <span class="expert-card-dept" style="{% if item.department == '儿童皮肤科' %}color: #f59e0b;{% elif item.department == '银屑病科' %}color: #8b5cf6;{% elif item.department == '过敏皮肤科' %}color: #10b981;{% elif item.department == '激光美容科' %}color: #ec4899;{% else %}color: #1864ff;{% endif %}">{{ item.department }}</span>
+            </div>
+            <div class="expert-card-stats">
+              <span style="color: #f59e0b;">★ <strong>{{ item.score }}</strong></span>
+              <span>·</span>
+              <span>从业{{ item.experience }}年</span>
+            </div>
+          </div>
+        </div>
+        
+        <p class="expert-card-desc">擅长：{{ item.specialties | join('、') }}</p>
+        
+        <div class="expert-card-data">
+          <div class="expert-card-data-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin: 0 auto; color: var(--text-lighter);"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            <strong>{{ item.cases / 1000 }}k</strong>
+            <span>累计患者</span>
+          </div>
+          <div class="expert-card-data-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin: 0 auto; color: var(--text-lighter);"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            <strong>{{ [15, 24, 11, 28, 19, 12, 9, 18] | random }}篇</strong>
+            <span>科普文章</span>
+          </div>
+          <div class="expert-card-data-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin: 0 auto; color: var(--text-lighter);"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            <strong>{{ item.experience }}年</strong>
+            <span>从业年限</span>
+          </div>
+        </div>
+
+        <div class="expert-card-tags">
+          {% for tag in item.tags.slice(0, 2) %}
+          <span class="expert-card-tag" style="{% if item.department == '儿童皮肤科' %}color: #f59e0b; background: #fffbeb; border-color: #fde68a;{% elif item.department == '银屑病科' %}color: #8b5cf6; background: #f5f3ff; border-color: #ddd6fe;{% elif item.department == '过敏皮肤科' %}color: #10b981; background: #ecfdf5; border-color: #a7f3d0;{% elif item.department == '激光美容科' %}color: #ec4899; background: #fdf2f8; border-color: #fbcfe8;{% else %}color: #1864ff; background: #eff6ff; border-color: #bfdbfe;{% endif %}">{{ tag }}</span>
+          {% endfor %}
+        </div>
+
+        <div class="expert-card-footer">
+          <span>{{ item.hospital }}博士</span>
+          <a href="/experts/{{ item.id }}" class="expert-card-link" style="{% if item.department == '儿童皮肤科' %}color: #f59e0b;{% elif item.department == '银屑病科' %}color: #8b5cf6;{% elif item.department == '过敏皮肤科' %}color: #10b981;{% elif item.department == '激光美容科' %}color: #ec4899;{% else %}color: #1864ff;{% endif %}">查看详情 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left: 2px;"><polyline points="9 18 15 12 9 6"></polyline></svg></a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
   </div>
-</section>
+</div>
 {% endblock %}
