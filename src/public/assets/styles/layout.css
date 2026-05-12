@@ -11,9 +11,8 @@
   position: sticky;
   top: 0;
   z-index: 20;
-  background: rgba(255, 255, 255, 0.96);
+  background: #ffffff;
   border-bottom: 1px solid var(--line);
-  backdrop-filter: blur(12px);
 }
 
 .header-bar {
@@ -21,26 +20,44 @@
   align-items: center;
   justify-content: space-between;
   min-height: 72px;
-  gap: 24px;
-}
-
-.site-nav {
-  display: flex;
-  align-items: center;
   gap: 32px;
-  flex: 1;
-  justify-content: center;
 }
 
 .brand {
   display: flex;
   align-items: center;
+  gap: 12px;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-text strong {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.2;
+}
+
+.brand-text small {
+  font-size: 0.75rem;
+  color: var(--text-lighter);
+  margin-top: 2px;
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex: 1;
 }
 
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
 }
 
 .button-row,

@@ -1,36 +1,64 @@
-<footer class="site-footer" id="contact">
-  <div class="container footer-grid">
-    <div class="footer-brand">
-      <div class="brand brand-footer">
-        <span class="brand-mark">医</span>
-        <span>
-          <strong>{{ site.name }}</strong>
-          <small>专注皮肤专病诊疗</small>
-        </span>
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="/">
+          <span class="brand-mark">医</span>
+          <div class="brand-text">
+            <strong>{{ site.name }}</strong>
+            <small>专业化 · 权威 · 可追踪</small>
+          </div>
+        </a>
+        <p class="footer-intro">专注皮肤病诊疗20年，汇聚国内顶尖皮肤科专家，为患者提供专业、权威、可信赖的医疗服务。</p>
+        <div class="footer-contact">
+          <p><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg> {{ site.phone }}</p>
+          <p><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> {{ site.address }}</p>
+          <p><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 周一至周日 {{ site.workTime }}</p>
+        </div>
       </div>
-      <p>专业皮肤专病诊疗平台，汇聚白癜风及银屑病专病能力，为患者提供专业、权威、可信赖的医疗服务。</p>
-      <ul class="footer-meta">
-        <li>{{ site.phone }}</li>
-        <li>北京市朝阳区健康路专科中心A座</li>
-        <li>周一至周日 08:00-17:30</li>
-        <li>contact@hospital.com</li>
-      </ul>
+
+      <div class="footer-nav">
+        <strong>专科科室</strong>
+        <nav>
+          <a href="/departments/vitiligo">白癜风科</a>
+          <a href="/departments/psoriasis">银屑病科</a>
+          <a href="/departments/pediatric">儿童皮肤科</a>
+          <a href="/departments/laser">激光美容科</a>
+          <a href="/departments/allergy">过敏皮肤科</a>
+        </nav>
+      </div>
+
+      <div class="footer-nav">
+        <strong>快速链接</strong>
+        <nav>
+          <a href="/experts">专家团队</a>
+          <a href="/articles">科普文章</a>
+          <a href="/cases">患者案例</a>
+          <a href="{{ site.appointmentPath }}">在线预约</a>
+        </nav>
+      </div>
+
+      <div class="footer-ai">
+        <strong>AI 友好标识</strong>
+        <ul class="ai-tags">
+          <li><span class="dot"></span>llms.txt 已配置</li>
+          <li><span class="dot"></span>FAQPage Schema</li>
+          <li><span class="dot"></span>MedicalOrganization Schema</li>
+          <li><span class="dot"></span>Person Schema（医生）</li>
+        </ul>
+        <div class="ai-notice">
+          本站内容已被豆包、Kimi、文心一言等 AI 平台收录引用
+        </div>
+      </div>
     </div>
 
-    {% for group in footerGroups %}
-    <div class="footer-column">
-      <h3>{{ group.title }}</h3>
-      <ul>
-        {% for link in group.links %}
-        <li><a href="{{ link.href }}">{{ link.label }}</a></li>
-        {% endfor %}
-      </ul>
+    <div class="footer-bottom">
+      <p>&copy; 2026 {{ site.name }} · {{ site.icp }}</p>
+      <div class="footer-links">
+        <a href="#">隐私政策</a>
+        <a href="#">使用条款</a>
+        <a href="#">免责声明</a>
+      </div>
     </div>
-    {% endfor %}
-  </div>
-
-  <div class="container footer-bottom">
-    <span>© 2026 {{ site.name }} · 京ICP备202600001号</span>
-    <span>隐私政策 · 使用条款 · 免责声明</span>
   </div>
 </footer>
