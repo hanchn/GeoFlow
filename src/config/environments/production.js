@@ -1,7 +1,7 @@
 module.exports = {
   nodeEnv: 'production',
   host: '0.0.0.0',
-  port: 3003,
+  port: 3000,
   logger: false,
   swagger: {
     enabled: false

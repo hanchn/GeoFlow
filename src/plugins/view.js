@@ -1,4 +1,5 @@
 const fastifyView = require('@fastify/view');
+const fastifyPlugin = require('fastify-plugin');
 const nunjucks = require('nunjucks');
 
 async function registerView(fastify, options) {
@@ -11,4 +12,6 @@ async function registerView(fastify, options) {
   });
 }
 
-module.exports = registerView;
+module.exports = fastifyPlugin(registerView, {
+  name: 'register-view'
+});

@@ -5,8 +5,8 @@
   "description": "GEO consumer-facing web project based on Fastify and Nunjucks.",
   "main": "server.js",
   "scripts": {
-    "dev": "APP_ENV=development node --watch server.js",
-    "start": "APP_ENV=testing node --watch server.js",
+    "dev": "APP_ENV=development APP_LOGGER=false node --watch server.js",
+    "start": "APP_ENV=testing APP_LOGGER=false node --watch server.js",
     "start:dev": "APP_ENV=development node --watch server.js",
     "start:test": "APP_ENV=testing node server.js",
     "start:staging": "APP_ENV=staging node server.js",

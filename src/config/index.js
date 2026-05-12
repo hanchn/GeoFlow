@@ -2,6 +2,18 @@ const path = require('path');
 const common = require('./common');
 const sites = require('./sites');
 
+function resolveLogger(enabledByEnv) {
+  if (process.env.APP_LOGGER === 'false') {
+    return false;
+  }
+
+  if (process.env.APP_LOGGER === 'true') {
+    return true;
+  }
+
+  return enabledByEnv;
+}
+
 const appEnv = process.env.APP_ENV || process.env.NODE_ENV || 'development';
 const rootDir = path.resolve(__dirname, '..', '..');
 const srcDir = path.join(rootDir, 'src');
@@ -16,7 +28,7 @@ const app = {
   nodeEnv: environmentConfig.nodeEnv,
   host: environmentConfig.host,
   port: Number(environmentConfig.port),
-  logger: environmentConfig.logger
+  logger: resolveLogger(environmentConfig.logger)
 };
 
 const view = {
