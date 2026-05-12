@@ -107,6 +107,7 @@
   transition: all 0.2s ease;
   cursor: pointer;
   text-decoration: none;
+  flex-shrink: 0;
 }
 
 .header-btn.primary {
@@ -145,6 +146,8 @@
   cursor: pointer;
   transition: all 0.2s ease;
   text-decoration: none;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .search-btn:hover {

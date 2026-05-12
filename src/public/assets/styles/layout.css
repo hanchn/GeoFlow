@@ -20,7 +20,7 @@
   align-items: center;
   justify-content: space-between;
   min-height: 72px;
-  gap: 32px;
+  gap: 20px;
 }
 
 .brand {
@@ -28,6 +28,8 @@
   align-items: center;
   gap: 12px;
   text-decoration: none;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .brand-mark {
@@ -41,11 +43,13 @@
   justify-content: center;
   font-size: 1.25rem;
   font-weight: 700;
+  flex-shrink: 0;
 }
 
 .brand-text {
   display: flex;
   flex-direction: column;
+  flex-shrink: 0;
 }
 
 .brand-text strong {
@@ -53,26 +57,30 @@
   font-weight: 700;
   color: var(--text);
   line-height: 1.2;
+  white-space: nowrap;
 }
 
 .brand-text small {
   font-size: 0.75rem;
   color: var(--text-lighter);
   margin-top: 2px;
+  white-space: nowrap;
 }
 
 .site-nav {
   display: flex;
   align-items: center;
-  gap: 28px;
+  gap: 24px;
   flex: 1;
   justify-content: center;
+  min-width: 0;
 }
 
 .header-actions {
   display: flex;
   align-items: center;
   gap: 12px;
+  flex-shrink: 0;
 }
 
 .button-row,
