@@ -5,8 +5,7 @@ module.exports = {
       { key: 'departments', label: '科室介绍', href: '/departments/white-spot' },
       { key: 'experts', label: '专家团队', href: '/experts' },
       { key: 'articles', label: '科普文章', href: '/articles' },
-      { key: 'cases', label: '患者案例', href: '/cases' },
-      { key: 'contact', label: '联系我们', href: '/#contact' }
+      { key: 'cases', label: '患者案例', href: '/cases' }
     ],
     searchSuggestions: [
       '白癜风能治好吗',

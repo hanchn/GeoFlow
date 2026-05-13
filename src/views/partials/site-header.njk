@@ -12,6 +12,7 @@
       {% for item in navItems %}
       <a class="nav-link {% if activeNav == item.key %}is-active{% endif %}" href="{{ item.href }}">{{ item.label }}</a>
       {% endfor %}
+      <a class="nav-link {% if activeNav == 'contact' %}is-active{% endif %}" href="/contact">联系我们</a>
     </nav>
 
     <div class="header-actions">
