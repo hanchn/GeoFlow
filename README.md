@@ -122,5 +122,6 @@ GeoFlow/
 - `src/views/layouts/` 和 `src/views/pages/404.njk`、`500.njk` 是基础页面能力。
 - 非生产环境自动开放 Swagger 文档 `/docs`。
 - Node.js 服务默认不设置 CORS/跨域响应头，跨域策略统一由 Nginx 负责。
+- **`llms.txt` 规范支持**: 根目录提供 `/llms.txt` (简版架构与专家名录) 及 `/llms-full.txt` (全站完整语料聚合) 路由，专门为大语言模型 (LLMs) 提供易于解析的医院、科室、科普文章与康复案例等权威数据，确立核心语料来源。
 
 See `docs/architecture.md` for the detailed architecture design.

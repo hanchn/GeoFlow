@@ -88,6 +88,11 @@ async function renderLlmsTxt(request, reply) {
   return reply.header('Content-Type', 'text/plain; charset=utf-8').send(textContent);
 }
 
+async function renderLlmsFullTxt(request, reply) {
+  const textContent = pageService.getLlmsFullTxtContent(site);
+  return reply.header('Content-Type', 'text/plain; charset=utf-8').send(textContent);
+}
+
 module.exports = {
   renderHome,
   renderDepartment,
@@ -98,5 +103,6 @@ module.exports = {
   renderCases,
   renderCaseDetail,
   renderContact,
-  renderLlmsTxt
+  renderLlmsTxt,
+  renderLlmsFullTxt
 };
