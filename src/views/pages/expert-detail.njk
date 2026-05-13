@@ -5,9 +5,17 @@
 <div class="page-header" style="background: #ffffff; border-bottom: 1px solid var(--line); padding: 16px 0; position: sticky; top: 72px; z-index: 10;">
   <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
     <div class="breadcrumb" style="display: flex; align-items: center; gap: 8px; color: var(--text-soft); font-size: 0.875rem;">
-      <a href="/" style="color: var(--text-soft); text-decoration: none;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: text-bottom; margin-right: 4px;"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg> {{ site.name }}</a>
-      <span style="color: #cbd5e1;">/</span>
-      <span style="color: var(--text); font-weight: 500;">专家详情</span>
+      {% for item in breadcrumbs %}
+        {% if loop.first %}
+          <a href="{{ item.href }}" style="color: var(--text-soft); text-decoration: none;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: text-bottom; margin-right: 4px;"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg> {{ item.label }}</a>
+        {% elif loop.last %}
+          <span style="color: #cbd5e1;">/</span>
+          <span style="color: var(--text); font-weight: 500;">{{ item.label }}</span>
+        {% else %}
+          <span style="color: #cbd5e1;">/</span>
+          <a href="{{ item.href }}" style="color: var(--text-soft); text-decoration: none;">{{ item.label }}</a>
+        {% endif %}
+      {% endfor %}
     </div>
     <a href="{{ site.appointmentPath }}" class="button primary" style="border-radius: 8px; padding: 8px 16px; height: 36px; font-size: 0.875rem; background: #1864ff; color: #fff; border: none; display: inline-flex; align-items: center; gap: 6px; cursor: pointer;">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
@@ -373,30 +381,16 @@
       <div class="card" style="padding: 24px; border-radius: 16px; background: #ffffff; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
         <h3 style="margin: 0 0 16px 0; font-size: 1rem; color: var(--text);">同科室医生</h3>
         <div class="side-doctor-list">
-          <a href="#" class="side-doctor-item">
-            <div class="side-doctor-avatar" style="background: #10b981;">李</div>
-            <div class="side-doctor-info">
-              <strong>李雪梅</strong>
-              <span>副主任医师 · 儿童皮肤科</span>
+          {% for relDoctor in relatedDoctors %}
+          <a href="/experts/{{ relDoctor.id or relDoctor.slug }}" class="side-doctor-item" style="display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line); text-decoration: none;">
+            <div class="side-doctor-avatar" style="width: 40px; height: 40px; border-radius: 50%; background: #1864ff; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.125rem; font-weight: 500; flex-shrink: 0;">{{ relDoctor.name | first }}</div>
+            <div class="side-doctor-info" style="flex: 1; min-width: 0;">
+              <strong style="display: block; font-size: 0.9375rem; color: var(--text); margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ relDoctor.name }}</strong>
+              <span style="display: block; font-size: 0.75rem; color: var(--text-soft); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ relDoctor.title }} · {{ relDoctor.department }}</span>
             </div>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-lighter)" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
           </a>
-          <a href="#" class="side-doctor-item">
-            <div class="side-doctor-avatar" style="background: #1864ff;">王</div>
-            <div class="side-doctor-info">
-              <strong>王建国</strong>
-              <span>主治医师 · 白癜风科</span>
-            </div>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-lighter)" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
-          </a>
-          <a href="#" class="side-doctor-item">
-            <div class="side-doctor-avatar" style="background: #8b5cf6;">陈</div>
-            <div class="side-doctor-info">
-              <strong>陈静雯</strong>
-              <span>主治医师 · 银屑病科</span>
-            </div>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-lighter)" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
-          </a>
+          {% endfor %}
         </div>
       </div>
 
