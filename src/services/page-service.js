@@ -6,7 +6,8 @@ function buildShell(site, activeNav) {
     activeNav,
     navItems: content.site.navItems,
     searchSuggestions: content.site.searchSuggestions,
-    footerGroups: content.site.footerGroups
+    footerGroups: content.site.footerGroups,
+    allDoctors: content.experts || content.doctors || []
   };
 }
 

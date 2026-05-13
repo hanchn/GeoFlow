@@ -1,0 +1,365 @@
+<!-- 预约挂号弹窗 -->
+<div id="appointmentModal" class="appointment-modal" style="display: none;">
+  <div class="appointment-overlay" onclick="closeAppointmentModal()"></div>
+  <div class="appointment-dialog">
+    <div class="appointment-header">
+      <div>
+        <h3 style="margin: 0; font-size: 1.125rem; color: var(--text);">在线预约挂号</h3>
+        <p id="appointmentStepText" style="margin: 4px 0 0; font-size: 0.8125rem; color: var(--text-soft);">第 1/3 步</p>
+      </div>
+      <button class="close-btn" onclick="closeAppointmentModal()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+
+    <div class="appointment-body">
+      <!-- 步骤 1：选择医生 -->
+      <div id="aptStep1" class="apt-step active">
+        <p style="font-weight: 500; margin: 0 0 16px 0; color: var(--text);">选择就诊医生</p>
+        <div class="doctor-select-list" style="max-height: 300px; overflow-y: auto;">
+          {% for doc in allDoctors %}
+          <label class="doctor-select-item {% if loop.first %}selected{% endif %}">
+            <input type="radio" name="aptDoctor" value="{{ doc.name }}" {% if loop.first %}checked{% endif %}>
+            <div class="doc-avatar" style="background: #1864ff;">{{ doc.name | first }}</div>
+            <div class="doc-info">
+              <strong>{{ doc.name }}</strong>
+              <span>{{ doc.title }} · {{ doc.department }}</span>
+            </div>
+            <div class="check-icon">
+              {% if loop.first %}
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="#1864ff" stroke="white" stroke-width="2"><circle cx="12" cy="12" r="10" fill="#1864ff" stroke="none"></circle><polyline points="8 12 11 15 16 9"></polyline></svg>
+              {% else %}
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#cbd5e1" stroke-width="2"><circle cx="12" cy="12" r="10"></circle></svg>
+              {% endif %}
+            </div>
+          </label>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- 步骤 2：选择时间 -->
+      <div id="aptStep2" class="apt-step" style="display: none;">
+        <p style="font-weight: 500; margin: 0 0 16px 0; color: var(--text);">选择就诊时间（今日）</p>
+        <div class="time-grid">
+          <label class="time-slot"><input type="radio" name="aptTime" value="08:30"><span>08:30</span></label>
+          <label class="time-slot"><input type="radio" name="aptTime" value="09:00"><span>09:00</span></label>
+          <label class="time-slot selected"><input type="radio" name="aptTime" value="09:30" checked><span>09:30</span></label>
+          <label class="time-slot"><input type="radio" name="aptTime" value="10:00"><span>10:00</span></label>
+          <label class="time-slot"><input type="radio" name="aptTime" value="10:30"><span>10:30</span></label>
+          <label class="time-slot"><input type="radio" name="aptTime" value="14:00"><span>14:00</span></label>
+          <label class="time-slot"><input type="radio" name="aptTime" value="14:30"><span>14:30</span></label>
+          <label class="time-slot"><input type="radio" name="aptTime" value="15:00"><span>15:00</span></label>
+        </div>
+      </div>
+
+      <!-- 步骤 3：填写信息 -->
+      <div id="aptStep3" class="apt-step" style="display: none;">
+        <p style="font-weight: 500; margin: 0 0 16px 0; color: var(--text);">填写就诊信息</p>
+        <div class="form-group">
+          <label class="form-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: -2px; margin-right: 4px;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> 就诊人姓名 <span style="color: #ef4444;">*</span></label>
+          <input type="text" class="form-input" placeholder="请输入真实姓名">
+        </div>
+        <div class="form-group">
+          <label class="form-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: -2px; margin-right: 4px;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg> 联系电话 <span style="color: #ef4444;">*</span></label>
+          <input type="tel" class="form-input" placeholder="请输入手机号">
+        </div>
+        <div class="apt-summary" style="background: #eff6ff; padding: 12px; border-radius: 8px; margin-top: 16px; display: flex; align-items: center; gap: 8px; color: #1864ff; font-size: 0.875rem;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          预约：<span id="aptSummaryText">王建国 医生 · 今日 09:30</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="appointment-footer">
+      <div id="aptFooter1">
+        <button class="button primary" style="width: 100%; border-radius: 8px; justify-content: center;" onclick="nextAptStep(2)">下一步：选择时间</button>
+      </div>
+      <div id="aptFooter2" style="display: none; gap: 12px;">
+        <button class="button secondary" style="flex: 1; border-radius: 8px; justify-content: center;" onclick="nextAptStep(1)">上一步</button>
+        <button class="button primary" style="flex: 1; border-radius: 8px; justify-content: center;" onclick="nextAptStep(3)">下一步：填写信息</button>
+      </div>
+      <div id="aptFooter3" style="display: none; gap: 12px;">
+        <button class="button secondary" style="flex: 1; border-radius: 8px; justify-content: center;" onclick="nextAptStep(2)">上一步</button>
+        <button class="button primary" style="flex: 1; border-radius: 8px; justify-content: center; background: #93c5fd; border-color: #93c5fd;" onclick="submitAppointment()">确认预约</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.appointment-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.appointment-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(12, 22, 44, 0.4);
+}
+.appointment-dialog {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  margin: 16px;
+  overflow: hidden;
+}
+.appointment-header {
+  padding: 24px 24px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 1px solid var(--line);
+}
+.close-btn {
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  color: var(--text-soft);
+}
+.close-btn:hover {
+  color: var(--text);
+}
+.appointment-body {
+  padding: 24px;
+  min-height: 280px;
+}
+.appointment-footer {
+  padding: 16px 24px 24px;
+}
+
+/* 步骤 1 */
+.doctor-select-list {
+  display: grid;
+  gap: 12px;
+}
+.doctor-select-item {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  gap: 12px;
+}
+.doctor-select-item:hover {
+  border-color: #93c5fd;
+}
+.doctor-select-item.selected {
+  border-color: #1864ff;
+  box-shadow: 0 0 0 1px #1864ff;
+}
+.doctor-select-item input {
+  display: none;
+}
+.doc-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.125rem;
+  font-weight: 500;
+}
+.doc-info {
+  flex: 1;
+}
+.doc-info strong {
+  display: block;
+  font-size: 1rem;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.doc-info span {
+  display: block;
+  font-size: 0.8125rem;
+  color: var(--text-soft);
+}
+
+/* 步骤 2 */
+.time-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+.time-slot {
+  display: block;
+  cursor: pointer;
+}
+.time-slot input {
+  display: none;
+}
+.time-slot span {
+  display: block;
+  text-align: center;
+  padding: 12px 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-size: 0.9375rem;
+  color: var(--text);
+  transition: all 0.2s;
+}
+.time-slot:hover span {
+  border-color: #93c5fd;
+}
+.time-slot.selected span {
+  border-color: #1864ff;
+  color: #1864ff;
+}
+
+/* 步骤 3 */
+.form-group {
+  margin-bottom: 16px;
+}
+.form-label {
+  display: block;
+  font-size: 0.875rem;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.form-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-size: 0.9375rem;
+  transition: all 0.2s;
+  box-sizing: border-box;
+}
+.form-input:focus {
+  outline: none;
+  border-color: #1864ff;
+  box-shadow: 0 0 0 2px rgba(24,100,255,0.1);
+}
+</style>
+
+<script>
+function openAppointmentModal() {
+  document.getElementById('appointmentModal').style.display = 'flex';
+  nextAptStep(1); // 默认打开第一步
+}
+
+function closeAppointmentModal() {
+  document.getElementById('appointmentModal').style.display = 'none';
+}
+
+function nextAptStep(step) {
+  // 更新文案
+  document.getElementById('appointmentStepText').textContent = `第 ${step}/3 步`;
+  
+  // 隐藏所有
+  document.querySelectorAll('.apt-step').forEach(el => el.style.display = 'none');
+  document.getElementById('aptFooter1').style.display = 'none';
+  document.getElementById('aptFooter2').style.display = 'none';
+  document.getElementById('aptFooter3').style.display = 'none';
+  
+  // 显示对应步
+  document.getElementById(`aptStep${step}`).style.display = 'block';
+  
+  // 显示对应底部操作
+  if (step === 1) {
+    document.getElementById('aptFooter1').style.display = 'block';
+  } else if (step === 2) {
+    document.getElementById('aptFooter2').style.display = 'flex';
+  } else if (step === 3) {
+    document.getElementById('aptFooter3').style.display = 'flex';
+    updateSummary();
+  }
+}
+
+function updateSummary() {
+  const doctor = document.querySelector('input[name="aptDoctor"]:checked')?.value || '未知医生';
+  const time = document.querySelector('input[name="aptTime"]:checked')?.value || '未知时间';
+  document.getElementById('aptSummaryText').textContent = `${doctor} 医生 · 今日 ${time}`;
+  
+  const inputs = document.querySelectorAll('.form-input');
+  const btn = document.querySelector('#aptFooter3 .primary');
+  
+  const checkInputs = () => {
+    let allFilled = true;
+    inputs.forEach(input => {
+      if (!input.value.trim()) allFilled = false;
+    });
+    if (allFilled) {
+      btn.style.background = '#1864ff';
+      btn.style.borderColor = '#1864ff';
+    } else {
+      btn.style.background = '#93c5fd';
+      btn.style.borderColor = '#93c5fd';
+    }
+  };
+  
+  inputs.forEach(input => {
+    input.addEventListener('input', checkInputs);
+  });
+}
+
+function submitAppointment() {
+  const inputs = document.querySelectorAll('.form-input');
+  let allFilled = true;
+  inputs.forEach(input => {
+    if (!input.value.trim()) allFilled = false;
+  });
+  if (allFilled) {
+    alert('预约成功！');
+    closeAppointmentModal();
+  } else {
+    alert('请填写完整就诊信息');
+  }
+}
+
+// 事件监听
+document.addEventListener('DOMContentLoaded', () => {
+  // 医生选择
+  document.querySelectorAll('.doctor-select-item input').forEach(radio => {
+    radio.addEventListener('change', (e) => {
+      document.querySelectorAll('.doctor-select-item').forEach(item => {
+        item.classList.remove('selected');
+        const icon = item.querySelector('.check-icon svg');
+        icon.innerHTML = '<circle cx="12" cy="12" r="10"></circle>';
+        icon.setAttribute('fill', 'none');
+        icon.setAttribute('stroke', '#cbd5e1');
+      });
+      const parent = e.target.closest('.doctor-select-item');
+      parent.classList.add('selected');
+      const icon = parent.querySelector('.check-icon svg');
+      icon.innerHTML = '<circle cx="12" cy="12" r="10" fill="#1864ff" stroke="none"></circle><polyline points="8 12 11 15 16 9"></polyline>';
+      icon.setAttribute('fill', '#1864ff');
+      icon.setAttribute('stroke', 'white');
+    });
+  });
+
+  // 时间选择
+  document.querySelectorAll('.time-slot input').forEach(radio => {
+    radio.addEventListener('change', (e) => {
+      document.querySelectorAll('.time-slot').forEach(item => {
+        item.classList.remove('selected');
+      });
+      e.target.closest('.time-slot').classList.add('selected');
+    });
+  });
+  
+  // 绑定全局挂号按钮
+  document.querySelectorAll('a[href="#"], button').forEach(el => {
+    if (el.textContent.includes('预约挂号') || el.textContent.includes('立即预约')) {
+      if (el.tagName === 'A' && el.getAttribute('href') !== '#') {
+         el.setAttribute('href', '#');
+      }
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+        openAppointmentModal();
+      });
+    }
+  });
+});
+</script>
