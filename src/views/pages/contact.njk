@@ -1,0 +1,108 @@
+{% extends "layouts/base.njk" %}
+
+{% block content %}
+{% include "partials/page-hero.njk" %}
+
+<section class="container content-section" style="padding-top: 40px;">
+  <!-- Schema 结构化数据 (LocalBusiness / MedicalOrganization) 注入 -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MedicalOrganization",
+    "name": "{{ site.name }}",
+    "telephone": "{{ site.phone }}",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "健康路专科中心A座",
+      "addressLocality": "朝阳区",
+      "addressRegion": "北京市",
+      "addressCountry": "CN"
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+        ],
+        "opens": "08:00",
+        "closes": "17:30"
+      }
+    ]
+  }
+  </script>
+
+  <div class="contact-layout" style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+    
+    <!-- 左侧：联系方式与地图 -->
+    <div>
+      <h2 style="font-size: 1.5rem; margin-bottom: 24px;">联系方式</h2>
+      <div class="contact-grid" style="grid-template-columns: 1fr; gap: 16px; margin-bottom: 32px;">
+        {% for item in contactCards %}
+        {% set contactItem = item %}
+        {% include "components/contact-card.njk" %}
+        {% endfor %}
+      </div>
+
+      <div class="map-container" style="background: #f1f5f9; border-radius: 16px; height: 300px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--line); overflow: hidden; position: relative;">
+        <!-- 这里是地图占位符，真实项目中可嵌入百度/高德地图 iframe -->
+        <div style="text-align: center; color: var(--text-soft);">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" style="margin-bottom: 8px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          <p style="margin: 0; font-size: 0.875rem;">地图组件加载区</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 右侧：乘车指引与常见问题 -->
+    <div>
+      <article class="card-surface" style="margin-bottom: 24px;">
+        <h2 style="font-size: 1.25rem; margin-bottom: 16px;">乘车指引</h2>
+        <ul style="list-style: none; padding: 0; margin: 0; display: grid; gap: 16px;">
+          <li style="display: flex; gap: 12px; align-items: flex-start;">
+            <div style="background: #eff6ff; color: #1864ff; width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><path d="M21 15l-5-5L5 21"></path></svg>
+            </div>
+            <div>
+              <strong style="display: block; font-size: 1rem; color: var(--text); margin-bottom: 4px;">地铁路线</strong>
+              <p style="margin: 0; font-size: 0.875rem; color: var(--text-soft); line-height: 1.5;">乘坐地铁 X 号线至“健康路站”下车，从 B 口出站后步行约 300 米即到。</p>
+            </div>
+          </li>
+          <li style="display: flex; gap: 12px; align-items: flex-start;">
+            <div style="background: #eff6ff; color: #1864ff; width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            </div>
+            <div>
+              <strong style="display: block; font-size: 1rem; color: var(--text); margin-bottom: 4px;">公交路线</strong>
+              <p style="margin: 0; font-size: 0.875rem; color: var(--text-soft); line-height: 1.5;">乘坐 101路、202路、303路至“专科中心北门”站下车即到。</p>
+            </div>
+          </li>
+        </ul>
+      </article>
+
+      <article class="card-surface">
+        <div class="section-title with-link inner-title">
+          <div>
+            <h2 style="font-size: 1.25rem;">就诊常见问题</h2>
+            <p>来院前您可能关心的问题</p>
+          </div>
+          <span style="color: var(--text-lighter); font-size: 0.75rem;">FAQPage Schema</span>
+        </div>
+        <div class="faq-list">
+          {% for item in faqs %}
+          {% set faqItem = item %}
+          {% include "components/faq-item.njk" %}
+          {% endfor %}
+        </div>
+      </article>
+    </div>
+
+  </div>
+</section>
+
+<style>
+@media (max-width: 768px) {
+  .contact-layout {
+    grid-template-columns: 1fr !important;
+  }
+}
+</style>
+{% endblock %}

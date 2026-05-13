@@ -73,6 +73,15 @@ async function renderCaseDetail(request, reply) {
   });
 }
 
+async function renderContact(request, reply) {
+  const pageData = pageService.getContactPage(site);
+  return reply.view('pages/contact.njk', {
+    title: '联系我们',
+    bodyClass: 'page-contact',
+    ...pageData
+  });
+}
+
 module.exports = {
   renderHome,
   renderDepartment,
@@ -81,5 +90,6 @@ module.exports = {
   renderArticles,
   renderArticleDetail,
   renderCases,
-  renderCaseDetail
+  renderCaseDetail,
+  renderContact
 };

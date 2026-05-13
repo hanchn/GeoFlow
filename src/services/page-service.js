@@ -188,6 +188,22 @@ function getCaseDetailPage(site, slug) {
   };
 }
 
+function getContactPage(site) {
+  return {
+    ...buildShell(site, 'contact'),
+    pageHero: buildPageHero('联系我们', '我们提供全天候的咨询服务与便捷的就医指引。', [
+      { label: '首页', href: '/' },
+      { label: '联系我们', href: '/contact' }
+    ]),
+    contactCards: content.site.contactCards,
+    faqs: [
+      { question: '医院附近好停车吗？', answer: '院内设有地下停车场，车位充足。此外周边300米内也有两个大型公共停车场。' },
+      { question: '外地患者就诊有绿色通道吗？', answer: '有的。我们为外地患者提供线上提前评估与预约，尽量确保当天完成主要检查与诊疗方案制定。' },
+      { question: '门诊可以使用医保吗？', answer: '我们是市医保定点单位，部分专科诊疗项目和药物支持医保报销，具体请在挂号时向工作人员确认。' }
+    ]
+  };
+}
+
 module.exports = {
   buildShell,
   getHomePage,
@@ -197,5 +213,6 @@ module.exports = {
   getArticlesPage,
   getArticleDetailPage,
   getCasesPage,
-  getCaseDetailPage
+  getCaseDetailPage,
+  getContactPage
 };
