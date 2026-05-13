@@ -1,46 +1,72 @@
 {% extends "layouts/base.njk" %}
 
 {% block content %}
-{% include "partials/page-hero.njk" %}
+<div class="page-hero">
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="/">首页</a>
+      <span>›</span>
+      <span>科普文章</span>
+    </div>
+    <h1>科普文章</h1>
+    <p>围绕白癜风、银屑病、儿童皮肤病与皮肤管理的高质量内容</p>
+  </div>
+</div>
 
-<section class="container content-section detail-layout">
-  <div class="page-stack">
-    <div class="card-surface search-bar-panel">
-      <input class="article-search" type="text" placeholder="搜索疾病、治疗方式..." />
-      <div class="tag-cloud compact">
-        {% for item in categories %}
-        <span class="filter-chip {% if loop.first %}is-active{% endif %}">{{ item }}</span>
-        {% endfor %}
+<div style="padding: 32px 0 64px;">
+  <div class="container">
+    
+    <!-- 筛选器 -->
+    <div class="filter-bar" style="background: #ffffff; padding: 16px 24px; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); margin-bottom: 32px; display: flex; align-items: center; gap: 32px; flex-wrap: wrap; justify-content: space-between;">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <span style="color: var(--text-soft); font-size: 0.875rem;">疾病分类：</span>
+        <div style="display: flex; gap: 8px;">
+          {% for item in categories %}
+          <a href="#" class="filter-chip {% if loop.first %}is-active{% endif %}" style="padding: 4px 16px; border-radius: 16px; font-size: 0.875rem; text-decoration: none; {% if loop.first %}background: #1864ff; color: #fff;{% else %}color: var(--text-soft);{% endif %}">{{ item }}</a>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="search-box" style="display: flex; align-items: center; background: var(--surface-soft); border-radius: 20px; padding: 6px 16px; width: 240px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-soft)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="text" placeholder="搜索文章..." style="border: none; background: transparent; outline: none; width: 100%; font-size: 0.875rem; color: var(--text);" />
       </div>
     </div>
 
-    <div class="article-grid">
+    <!-- 文章网格 -->
+    <div class="expert-grid">
       {% for article in articles %}
-      {% set cardArticle = article %}
-      {% include "components/article-card.njk" %}
+      <div class="expert-card" style="padding: 0; overflow: hidden; display: flex; flex-direction: column;">
+        <div style="height: 160px; background: #f3f4f6; position: relative;">
+          <!-- 占位图，可以用简单的渐变或颜色 -->
+          <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #e0e7ff 0%, #dbeafe 100%); display: flex; align-items: center; justify-content: center;">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#bfdbfe" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+          </div>
+          <span style="position: absolute; top: 12px; left: 12px; background: rgba(255,255,255,0.9); color: #1864ff; font-size: 0.75rem; font-weight: 600; padding: 4px 10px; border-radius: 12px;">{{ article.category }}</span>
+        </div>
+        <div style="padding: 20px; flex: 1; display: flex; flex-direction: column;">
+          <h3 style="font-size: 1.125rem; font-weight: 700; margin: 0 0 8px 0; color: var(--text); line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;"><a href="/articles/{{ article.slug }}" style="color: inherit; text-decoration: none;">{{ article.title }}</a></h3>
+          <p style="font-size: 0.875rem; color: var(--text-soft); line-height: 1.5; margin: 0 0 16px 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">{{ article.excerpt }}</p>
+          
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px;">
+            {% for tag in article.tags %}
+            <span style="font-size: 0.75rem; color: var(--text-soft); background: var(--surface-soft); padding: 4px 10px; border-radius: 4px;"># {{ tag }}</span>
+            {% endfor %}
+          </div>
+          
+          <div style="margin-top: auto; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--line); padding-top: 16px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <div style="width: 24px; height: 24px; border-radius: 50%; background: #1864ff; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 0.6rem; font-weight: 700;">医</div>
+              <span style="font-size: 0.8125rem; color: var(--text-soft);">{{ article.publishDate }}</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px; font-size: 0.75rem; color: var(--text-lighter);">
+              <span style="display: flex; align-items: center; gap: 4px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg> {{ article.views }}</span>
+              <span style="display: flex; align-items: center; gap: 4px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> {{ article.readingTime }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
       {% endfor %}
     </div>
   </div>
-
-  <aside class="detail-sidebar">
-    <article class="card-surface">
-      <h2>推荐专家</h2>
-      <div class="doctor-grid">
-        {% for item in recommendedDoctors %}
-        {% set cardDoctor = item %}
-        {% include "components/doctor-card.njk" %}
-        {% endfor %}
-      </div>
-    </article>
-
-    <article class="card-surface">
-      <h2>热门标签</h2>
-      <div class="tag-cloud compact">
-        {% for item in hotTags %}
-        <span class="tag-chip muted">{{ item }}</span>
-        {% endfor %}
-      </div>
-    </article>
-  </aside>
-</section>
+</div>
 {% endblock %}

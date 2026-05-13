@@ -17,54 +17,54 @@
 </div>
 
 <div style="padding: 24px 0 64px;">
-  <div class="container layout-sidebar">
+  <div class="container detail-layout">
     
     <!-- 左侧主列 -->
-    <div class="main-content" style="display: flex; flex-direction: column; gap: 24px;">
+    <div class="page-stack" style="display: flex; flex-direction: column; gap: 24px;">
       
       <!-- 医生名片 -->
       <div class="card" style="padding: 32px; border-radius: 16px; background: #ffffff; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
         <div style="display: flex; gap: 24px;">
           <div class="avatar" style="width: 100px; height: 100px; border-radius: 16px; background: #1864ff; color: #ffffff; font-size: 2.5rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-            {{ expert.name | first }}
+            {{ doctor.name | first }}
           </div>
           <div style="flex: 1;">
             <div style="display: flex; align-items: baseline; gap: 12px; margin-bottom: 12px;">
-              <h1 style="font-size: 1.75rem; font-weight: 700; margin: 0; color: var(--text);">{{ expert.name }}</h1>
-              <span style="color: var(--text-soft); font-size: 0.875rem; background: var(--surface-soft); padding: 4px 8px; border-radius: 4px;">{{ expert.title }}</span>
+              <h1 style="font-size: 1.75rem; font-weight: 700; margin: 0; color: var(--text);">{{ doctor.name }}</h1>
+              <span style="color: var(--text-soft); font-size: 0.875rem; background: var(--surface-soft); padding: 4px 8px; border-radius: 4px;">{{ doctor.title }}</span>
             </div>
             
             <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px; font-size: 0.875rem;">
-              <span style="color: #1864ff; background: #eff6ff; padding: 4px 8px; border-radius: 4px; font-weight: 500;">{{ expert.department }}</span>
-              <span style="color: var(--text-soft);">从业{{ expert.experience }}年 · 诊治{{ expert.cases }}+例</span>
+              <span style="color: #1864ff; background: #eff6ff; padding: 4px 8px; border-radius: 4px; font-weight: 500;">{{ doctor.department }}</span>
+              <span style="color: var(--text-soft);">从业{{ doctor.experience }}年 · 诊治{{ doctor.cases }}+例</span>
             </div>
 
             <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px;">
-              {% for tag in expert.tags %}
+              {% for tag in doctor.tags %}
               <span style="color: #1864ff; border: 1px solid #bfdbfe; padding: 2px 10px; border-radius: 12px; font-size: 0.75rem;">{{ tag }}</span>
               {% endfor %}
             </div>
 
-            <p style="color: var(--text); line-height: 1.6; font-size: 0.9375rem; margin: 0;">{{ expert.description }}</p>
+            <p style="color: var(--text); line-height: 1.6; font-size: 0.9375rem; margin: 0;">{{ doctor.description }}</p>
           </div>
         </div>
 
         <!-- 数据指标块 -->
         <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 32px; border-top: 1px solid var(--line); padding-top: 32px;">
           <div style="background: #f8fafc; padding: 16px; border-radius: 12px; text-align: center;">
-            <strong style="display: block; color: #1864ff; font-size: 1.25rem; font-weight: 700; margin-bottom: 4px;">{{ expert.experience }}年</strong>
+            <strong style="display: block; color: #1864ff; font-size: 1.25rem; font-weight: 700; margin-bottom: 4px;">{{ doctor.experience }}年</strong>
             <span style="color: var(--text-soft); font-size: 0.75rem;">从业年限</span>
           </div>
           <div style="background: #f8fafc; padding: 16px; border-radius: 12px; text-align: center;">
-            <strong style="display: block; color: #1864ff; font-size: 1.25rem; font-weight: 700; margin-bottom: 4px;">{{ expert.cases }}+</strong>
+            <strong style="display: block; color: #1864ff; font-size: 1.25rem; font-weight: 700; margin-bottom: 4px;">{{ doctor.cases }}+</strong>
             <span style="color: var(--text-soft); font-size: 0.75rem;">诊治病例</span>
           </div>
           <div style="background: #f8fafc; padding: 16px; border-radius: 12px; text-align: center;">
-            <strong style="display: block; color: #1864ff; font-size: 1.25rem; font-weight: 700; margin-bottom: 4px;">{{ expert.score }}</strong>
+            <strong style="display: block; color: #1864ff; font-size: 1.25rem; font-weight: 700; margin-bottom: 4px;">{{ doctor.score }}</strong>
             <span style="color: var(--text-soft); font-size: 0.75rem;">患者评分</span>
           </div>
           <div style="background: #f8fafc; padding: 16px; border-radius: 12px; text-align: center;">
-            <strong style="display: block; color: #1864ff; font-size: 1.25rem; font-weight: 700; margin-bottom: 4px;">¥{{ expert.fee }}</strong>
+            <strong style="display: block; color: #1864ff; font-size: 1.25rem; font-weight: 700; margin-bottom: 4px;">¥{{ doctor.fee | default(300) }}</strong>
             <span style="color: var(--text-soft); font-size: 0.75rem;">挂号费</span>
           </div>
         </div>
@@ -77,7 +77,7 @@
           擅长领域
         </h2>
         <ul style="list-style: none; padding: 0; margin: 0; display: grid; gap: 16px;">
-          {% for spec in expert.specialties %}
+          {% for spec in doctor.specialties %}
           <li style="display: flex; align-items: flex-start; gap: 12px; color: var(--text); font-size: 0.9375rem; line-height: 1.5;">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" style="flex-shrink: 0; margin-top: 2px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
             {{ spec }}
@@ -294,11 +294,11 @@
     </div>
 
     <!-- 右侧边栏 -->
-    <aside class="sidebar" style="display: flex; flex-direction: column; gap: 24px;">
+    <aside class="detail-sidebar" style="display: flex; flex-direction: column; gap: 24px;">
       
       <!-- 预约挂号 (模拟数据) -->
       <div class="card" style="padding: 24px; border-radius: 16px; background: #ffffff; box-shadow: 0 1px 2px rgba(0,0,0,0.05); position: sticky; top: 100px;">
-        <h3 style="margin: 0 0 4px 0; font-size: 1rem; color: var(--text);">预约 张明辉 医生</h3>
+        <h3 style="margin: 0 0 4px 0; font-size: 1rem; color: var(--text);">预约 {{ doctor.name }} 医生</h3>
         <p style="margin: 0 0 20px 0; font-size: 0.8125rem; color: var(--text-soft);">最近可约：<strong style="color: #10b981;">明日 09:00</strong></p>
         
         <div style="margin-bottom: 24px;">
@@ -334,7 +334,7 @@
 
         <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: #eff6ff; border-radius: 8px; margin-bottom: 24px;">
           <span style="font-size: 0.875rem; color: var(--text-soft);">挂号费</span>
-          <strong style="font-size: 1.25rem; color: #1864ff;">¥300</strong>
+          <strong style="font-size: 1.25rem; color: #1864ff;">¥{{ doctor.fee | default(300) }}</strong>
         </div>
 
         <button style="width: 100%; padding: 12px 0; background: #1864ff; color: #fff; border: none; border-radius: 8px; font-size: 1rem; font-weight: 500; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 12px;">
@@ -347,7 +347,7 @@
           电话咨询
         </button>
         
-        <p style="text-align: center; margin: 16px 0 0 0; font-size: 0.75rem; color: var(--text-lighter);">已有 <strong>12,000</strong> 位患者选择了张明辉医生</p>
+        <p style="text-align: center; margin: 16px 0 0 0; font-size: 0.75rem; color: var(--text-lighter);">已有 <strong>{{ doctor.cases }}</strong> 位患者选择了{{ doctor.name }}医生</p>
       </div>
 
       <!-- 学术职务 -->

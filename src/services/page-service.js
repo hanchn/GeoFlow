@@ -120,6 +120,7 @@ function getArticleDetailPage(site, slug) {
     ...buildShell(site, 'articles'),
     article,
     author,
+    relatedArticles: content.articles.filter((item) => item.slug !== article.slug).slice(0, 5),
     breadcrumbs: [
       { label: '首页', href: '/' },
       { label: '科普文章', href: '/articles' },
