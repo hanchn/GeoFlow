@@ -18,8 +18,8 @@
         <div><strong>{{ item.value }}</strong><span>{{ item.label }}</span></div>
         {% endfor %}
       </div>
-      <h3>{{ featuredCase.title }}</h3>
-      <p>{{ featuredCase.summary }}</p>
+      <h3 style="margin: 16px 0 8px; font-size: 1.25rem;"><a href="/cases/{{ featuredCase.slug }}" style="color: var(--text); text-decoration: none;">{{ featuredCase.title }}</a></h3>
+      <p style="color: var(--text-soft); line-height: 1.6; margin-bottom: 16px;">{{ featuredCase.summary }}</p>
       <div class="tag-cloud compact">
         {% for item in featuredCase.tags %}
         <span class="tag-chip">{{ item }}</span>
@@ -47,7 +47,7 @@
   <aside class="detail-sidebar">
     <article class="card-surface">
       <h2>推荐专家</h2>
-      <div class="doctor-grid">
+      <div class="doctor-grid" style="grid-template-columns: 1fr;">
         {% for item in recommendedDoctors %}
         {% set cardDoctor = item %}
         {% include "components/doctor-card.njk" %}
