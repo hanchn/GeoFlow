@@ -11,6 +11,7 @@ async function routes(fastify) {
   fastify.get('/cases', siteController.renderCases);
   fastify.get('/cases/:slug', siteController.renderCaseDetail);
   fastify.get('/contact', siteController.renderContact);
+  fastify.get('/llms.txt', siteController.renderLlmsTxt);
 
   fastify.get('/health', {
     schema: {

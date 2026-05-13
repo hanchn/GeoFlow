@@ -4,7 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ title }} | {{ site.titleSuffix }}</title>
-    <meta name="description" content="{{ site.seo.description }}" />
+    <meta name="description" content="{{ seo.description or site.seo.description }}" />
+    <meta name="keywords" content="{{ seo.keywords or site.seo.keywords }}" />
+    
+    <!-- Open Graph & SEO Tags -->
+    <meta property="og:title" content="{{ title }} | {{ site.titleSuffix }}" />
+    <meta property="og:description" content="{{ seo.description or site.seo.description }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ site.url }}{{ currentPath }}" />
+    <meta property="og:site_name" content="{{ site.name }}" />
+    <link rel="canonical" href="{{ site.url }}{{ currentPath }}" />
+    
     <link rel="stylesheet" href="/assets/styles/main.css" />
   </head>
   <body class="{{ bodyClass or '' }}">

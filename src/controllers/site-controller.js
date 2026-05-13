@@ -78,8 +78,14 @@ async function renderContact(request, reply) {
   return reply.view('pages/contact.njk', {
     title: '联系我们',
     bodyClass: 'page-contact',
+    currentPath: request.url,
     ...pageData
   });
+}
+
+async function renderLlmsTxt(request, reply) {
+  const textContent = pageService.getLlmsTxtContent(site);
+  return reply.header('Content-Type', 'text/plain; charset=utf-8').send(textContent);
 }
 
 module.exports = {
@@ -91,5 +97,6 @@ module.exports = {
   renderArticleDetail,
   renderCases,
   renderCaseDetail,
-  renderContact
+  renderContact,
+  renderLlmsTxt
 };
