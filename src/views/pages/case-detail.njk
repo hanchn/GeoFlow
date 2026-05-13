@@ -10,14 +10,26 @@
         {% endfor %}
       </nav>
       <span class="article-category">{{ caseStudy.category }}</span>
-      <h1>{{ caseStudy.title }}</h1>
-      <div class="article-meta">
-        <span>{{ caseStudy.patientLabel }}</span>
-        <span>{{ doctor.name }}</span>
-        <span>{{ caseStudy.publishDate }}</span>
+      <h1 style="font-size: 1.75rem; margin-bottom: 12px;">{{ caseStudy.title }}</h1>
+      <div class="article-meta" style="margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--line);">
+        <span style="background: #eff6ff; color: #1864ff; padding: 4px 8px; border-radius: 4px; font-weight: 500;">{{ caseStudy.patientLabel }}</span>
+        <span>主治医生：{{ doctor.name }}</span>
+        <span>发布于 {{ caseStudy.publishDate }}</span>
       </div>
-      <p class="detail-intro">{{ caseStudy.summary }}</p>
-      <div class="tag-cloud compact">
+
+      <div class="detail-stats case-hero-stats" style="margin-bottom: 24px; background: #f8fafc; padding: 20px; border-radius: 12px;">
+        {% for item in caseStudy.heroStats %}
+        <div style="text-align: center;">
+          <strong style="display: block; color: #1864ff; font-size: 1.25rem;">{{ item.value }}</strong>
+          <span style="color: var(--text-soft); font-size: 0.8125rem;">{{ item.label }}</span>
+        </div>
+        {% endfor %}
+      </div>
+
+      <div class="detail-intro" style="font-size: 1.0625rem; line-height: 1.7; color: var(--text);">
+        <p><strong>案例导读：</strong>{{ caseStudy.summary }}</p>
+      </div>
+      <div class="tag-cloud compact" style="margin-top: 16px;">
         {% for tag in caseStudy.tags %}
         <span class="tag-chip">{{ tag }}</span>
         {% endfor %}
@@ -25,28 +37,36 @@
     </article>
 
     <article class="card-surface">
-      <h2>治疗过程节点</h2>
+      <h2 style="font-size: 1.25rem; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--line);">治疗节点与病程追踪</h2>
       <div class="timeline-list">
         {% for item in caseStudy.timeline %}
-        <div class="timeline-item">
-          <strong>{{ item.stage }}</strong>
-          <p>{{ item.detail }}</p>
+        <div class="timeline-item" style="display: flex; gap: 16px; padding: 0;">
+          <div class="timeline-time" style="background: #eff6ff; color: #1864ff; font-weight: 500; min-width: 80px; text-align: center; border-radius: 8px; padding: 8px;">{{ item.stage }}</div>
+          <div class="timeline-content" style="padding-top: 8px;">
+            <p style="margin: 0; line-height: 1.6; color: var(--text);">{{ item.detail }}</p>
+          </div>
         </div>
         {% endfor %}
       </div>
     </article>
 
     <article class="card-surface">
-      <h2>案例要点</h2>
-      <ul class="simple-list">
+      <h2 style="font-size: 1.25rem; margin-bottom: 16px;">管理经验总结</h2>
+      <ul class="simple-list" style="list-style: disc; padding-left: 20px; color: var(--text); line-height: 1.7;">
         {% for item in caseStudy.highlights %}
-        <li>{{ item }}</li>
+        <li style="margin-bottom: 8px;">{{ item }}</li>
         {% endfor %}
       </ul>
     </article>
 
     <article class="card-surface">
-      <h2>案例问答</h2>
+      <div class="section-title with-link inner-title">
+        <div>
+          <h2 style="font-size: 1.25rem;">医生 QA 问答</h2>
+          <p>针对本案例的共性问题解答</p>
+        </div>
+        <span style="color: var(--text-lighter); font-size: 0.75rem;">FAQPage Schema</span>
+      </div>
       <div class="faq-list">
         {% for item in caseStudy.qa %}
         {% set faqItem = item %}
@@ -54,45 +74,33 @@
         {% endfor %}
       </div>
     </article>
-
-    <article class="card-surface">
-      <div class="section-title with-link inner-title">
-        <div>
-          <h2>相关案例</h2>
-          <p>查看更多同类患者的治疗与管理路径。</p>
-        </div>
-        <a href="/cases">查看全部</a>
-      </div>
-      <div class="case-list compact-case-list">
-        {% for item in relatedCases %}
-        {% set caseItem = item %}
-        {% include "components/case-card.njk" %}
-        {% endfor %}
-      </div>
-    </article>
   </div>
 
   <aside class="detail-sidebar">
     <article class="card-surface sticky-card">
-      <h2>主诊医生</h2>
-      <div class="doctor-card-head">
-        <span class="doctor-avatar">{{ doctor.shortName }}</span>
+      <h2 style="font-size: 1rem; margin-bottom: 16px;">主治医生</h2>
+      <div class="doctor-card-head" style="margin-bottom: 16px;">
+        <span class="doctor-avatar" style="background: #1864ff; color: #fff; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 50%;">{{ doctor.name | first }}</span>
         <div>
-          <strong>{{ doctor.name }}</strong>
-          <p>{{ doctor.department }} · {{ doctor.title }}</p>
+          <strong style="font-size: 1.125rem;">{{ doctor.name }}</strong>
+          <p style="font-size: 0.8125rem; color: var(--text-soft); margin-top: 4px;">{{ doctor.department }} · {{ doctor.title }}</p>
         </div>
       </div>
-      <div class="button-stack">
-        <a class="button primary" href="/experts/{{ doctor.slug }}">咨询医生</a>
-        <a class="button secondary" href="tel:{{ site.phone }}">{{ site.phone }}</a>
+      <div class="button-stack" style="display: flex; flex-direction: column; gap: 12px;">
+        <a class="button primary" href="/experts/{{ doctor.slug or doctor.id }}" style="width: 100%; justify-content: center; border-radius: 8px;">查看医生详情</a>
+        <button class="button secondary" onclick="openAppointmentModal()" style="width: 100%; justify-content: center; border-radius: 8px;">预约该医生</button>
       </div>
     </article>
 
     <article class="card-surface">
-      <h2>案例指标</h2>
-      <div class="detail-stats case-sidebar-stats">
-        {% for item in caseStudy.heroStats %}
-        <div><strong>{{ item.value }}</strong><span>{{ item.label }}</span></div>
+      <h2 style="font-size: 1rem; margin-bottom: 16px;">其他相似案例</h2>
+      <div class="case-list compact-case-list" style="display: flex; flex-direction: column; gap: 16px;">
+        {% for item in relatedCases %}
+        <div style="padding-bottom: 16px; border-bottom: 1px solid var(--line);">
+          <span style="font-size: 0.75rem; color: #1864ff; display: block; margin-bottom: 4px;">{{ item.category }}</span>
+          <a href="/cases/{{ item.slug }}" style="font-size: 0.9375rem; color: var(--text); font-weight: 500; text-decoration: none; line-height: 1.4; display: block; margin-bottom: 8px;">{{ item.title }}</a>
+          <span style="font-size: 0.75rem; color: var(--text-soft);">{{ item.patientLabel }}</span>
+        </div>
         {% endfor %}
       </div>
     </article>
